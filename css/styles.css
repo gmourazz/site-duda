@@ -1,0 +1,157 @@
+/* Importando as fontes do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@300;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif; /* Usando Roboto para o corpo do site */
+  background-color: #F8F8F8;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+header {
+  background-color: #000;
+  color: #fff;
+  padding: 20px 30px;
+  position: relative;
+}
+
+.header-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  display: block;
+  margin-right: 20px; /* Espaçamento entre logo e texto */
+  object-fit: cover;
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif; /* Usando Montserrat para o título */
+  font-size: 2.5rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  color: #777;
+}
+
+section {
+  padding: 40px 30px;
+  margin: 20px 0;
+}
+
+h2 {
+  font-family: 'Montserrat', sans-serif; /* Usando Montserrat para os subtítulos */
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.produto {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.produto img {
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.produto p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.produtos-destaque {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.sobre-duda {
+  padding: 40px 30px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+}
+
+.sobre-duda h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.sobre-duda p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.1rem;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.img-duda {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  margin-bottom: 20px;
+  object-fit: cover;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+footer p {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* Posicionar o botão do WhatsApp no canto inferior direito */
+.btn-whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: inline-flex;
+  align-items: center;
+  background-color: #25D366;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-whatsapp img {
+  margin-right: 8px;
+}
+
+.btn-whatsapp:hover {
+  background-color: #128C7E;
+}
