@@ -9,19 +9,19 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: 'Roboto', sans-serif;
     }
     
     body {
-      background-color: #f8f8f8;
+      background-color: #e0e0e0;
       color: #333;
       line-height: 1.6;
     }
     
     header {
-      background-color: #fff;
+      background-color: #424242;
       padding: 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -42,72 +42,137 @@
       border-radius: 50%;
       margin-right: 15px;
       object-fit: cover;
+      border: 2px solid #bdbdbd;
     }
     
     h1 {
       font-size: 1.8rem;
-      color: #d3d3d3;
+      color: #e0e0e0;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+    }
+    
+    .header-container p {
+      color: #bdbdbd;
+      font-size: 0.9rem;
     }
     
     .menu-categorias {
       display: flex;
-      gap: 10px;
+      gap: 15px;
       flex-wrap: wrap;
       justify-content: center;
     }
     
     .btn-categoria {
-      background-color: #d3d3d3;
-      color: white;
+      background-color: #616161;
+      color: #f5f5f5;
       border: none;
-      padding: 8px 15px;
-      border-radius: 5px;
+      padding: 10px 20px;
+      border-radius: 25px;
       cursor: pointer;
       font-weight: bold;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       white-space: nowrap;
-      transition: background-color 0.3s;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
     }
     
     .btn-categoria:hover {
-      background-color: #b8b8b8;
+      background-color: #757575;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
-    
-    .btn-sobre-duda {
-      background-color: #d3d3d3;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
+
+    .btn-categoria::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      border-radius: 100%;
+      transform: scale(1, 1) translate(-50%);
+      transform-origin: 50% 50%;
+    }
+
+    .btn-categoria:focus:not(:active)::after {
+      animation: ripple 0.6s ease-out;
+    }
+
+    @keyframes ripple {
+      0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+      }
+      100% {
+        transform: scale(20, 20);
+        opacity: 0;
+      }
     }
     
     .conteudo-principal {
       margin-top: 120px;
+      padding: 20px;
     }
     
     section {
-      padding: 30px 20px;
+      padding: 30px 0;
       max-width: 1200px;
-      margin: 0 auto;
+      margin: 20px auto;
       display: none;
+      background-color: transparent;
+      position: relative;
+      overflow: hidden;
     }
-    
+
     section.ativo {
       display: block;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     
     h2 {
-      color: #d3d3d3;
+      color: #424242;
       margin-bottom: 20px;
       text-align: center;
+      position: relative;
+      padding-bottom: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+    }
+
+    h2::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 2px;
+      background-color: #bdbdbd;
     }
     
     .carrossel-principal, .carrossel-feedbacks {
       position: relative;
       max-width: 800px;
       margin: 30px auto;
+      background-color: transparent;
+      border-radius: 15px;
     }
     
     .look-container, .feedback-container {
@@ -126,9 +191,9 @@
       align-items: center;
       justify-content: center;
       margin: 20px 0;
+      background-color: transparent;
     }
     
-    /* Estilo modificado para o carrossel de feedbacks */
     .carrossel-feedback-imagens {
       position: relative;
       width: 100%;
@@ -138,6 +203,7 @@
       overflow: hidden;
       border-radius: 15px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      background-color: #f8f8f8;
     }
     
     .feedback-slides-container {
@@ -152,6 +218,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      background-color: #f8f8f8;
     }
     
     .feedback-slide img {
@@ -184,17 +251,18 @@
       transform: translateY(-50%);
       font-size: 2rem;
       color: white;
-      background-color: rgba(0,0,0,0.5);
+      background-color: rgba(66, 66, 66, 0.7);
       cursor: pointer;
       padding: 10px;
       z-index: 10;
       border-radius: 50%;
       user-select: none;
-      transition: background-color 0.3s;
+      transition: all 0.3s;
     }
     
     .seta:hover {
-      background-color: rgba(0,0,0,0.7);
+      background-color: rgba(66, 66, 66, 0.9);
+      transform: translateY(-50%) scale(1.1);
     }
     
     .seta.esquerda {
@@ -207,7 +275,7 @@
     
     .seta-principal {
       font-size: 2.5rem;
-      background-color: rgba(0,0,0,0.7);
+      background-color: rgba(66, 66, 66, 0.7);
       padding: 15px;
     }
     
@@ -215,14 +283,17 @@
       font-size: 1.5rem;
       margin: 15px 0;
       font-weight: bold;
-      color: #d3d3d3;
+      color: #424242;
+      font-family: 'Montserrat', sans-serif;
     }
     
     .sobre-duda {
-      background-color: #fff;
+      background-color: #f0f0f0;
       padding: 30px;
       margin-top: 30px;
       text-align: center;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
     
     .img-duda {
@@ -232,41 +303,75 @@
       object-fit: cover;
       margin: 20px auto;
       display: block;
+      border: 3px solid #bdbdbd;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     
     footer {
       text-align: center;
       padding: 20px;
-      background-color: #333;
-      color: white;
+      background-color: #424242;
+      color: #e0e0e0;
       margin-top: 30px;
+      position: relative;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+    }
+
+    footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #616161, #757575, #616161);
+    }
+    
+    footer p {
+      color: #bdbdbd;
+      font-size: 0.9rem;
     }
     
     .btn-whatsapp, .btn-instagram {
       position: fixed;
       right: 30px;
-      background-color: #25D366;
       color: white;
       padding: 15px;
       border-radius: 50px;
       text-decoration: none;
       display: flex;
       align-items: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
       z-index: 100;
+      transition: all 0.3s;
     }
     
     .btn-whatsapp {
+      background-color: #616161;
       bottom: 30px;
     }
     
     .btn-instagram {
-      background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+      background-color: #757575;
       bottom: 90px;
     }
     
     .btn-whatsapp img, .btn-instagram img {
       margin-right: 10px;
+      filter: brightness(0) invert(1);
+    }
+
+    .btn-whatsapp:hover, .btn-instagram:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+    
+    .btn-whatsapp:hover {
+      background-color: #757575;
+    }
+    
+    .btn-instagram:hover {
+      background-color: #9e9e9e;
     }
     
     .lista-pagamentos {
@@ -279,25 +384,28 @@
       position: relative;
       padding-left: 25px;
       margin-bottom: 10px;
+      color: #424242;
     }
     
     .lista-pagamentos li:before {
       content: "→";
       position: absolute;
       left: 0;
-      color: #333;
+      color: #616161;
+      font-weight: bold;
     }
     
     .texto-destaque {
       font-size: 1.2rem;
       margin-bottom: 15px;
+      text-align: center;
+      color: #424242;
     }
     
     .texto-negrito {
       font-weight: bold;
     }
     
-    /* Estilos para os dots de navegação do feedback */
     .feedback-dots {
       display: flex;
       justify-content: center;
@@ -305,17 +413,31 @@
     }
     
     .feedback-dot {
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
-      background-color: #ccc;
+      background-color: #bdbdbd;
       margin: 0 5px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: all 0.3s;
     }
     
     .feedback-dot.active {
-      background-color: #d3d3d3;
+      background-color: #616161;
+      transform: scale(1.2);
+    }
+
+    @keyframes btnClickWave {
+      0% {
+        box-shadow: 0 0 0 0 rgba(97, 97, 97, 0.4);
+      }
+      100% {
+        box-shadow: 0 0 0 10px rgba(97, 97, 97, 0);
+      }
+    }
+
+    .btn-categoria:active {
+      animation: btnClickWave 0.4s ease-out;
     }
     
     @media (max-width: 768px) {
@@ -336,6 +458,12 @@
         overflow-x: auto;
         padding-bottom: 10px;
         justify-content: flex-start;
+        gap: 8px;
+      }
+
+      .btn-categoria {
+        padding: 8px 15px;
+        font-size: 0.8rem;
       }
       
       .conteudo-principal {
@@ -361,11 +489,12 @@
       }
     }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
     <div class="header-container">
-      <img src="src/img/logo.jpeg" alt="Logo Use Dude" class="logo" />
+      <img src="src/img/logo.png" alt="Logo Use Dude" class="logo" />
       <div>
         <h1>Use Dude</h1>
         <p>- By Duda Macedo</p>
@@ -386,22 +515,19 @@
   <div class="conteudo-principal">
     <!-- Página Inicial/Produtos Disponíveis -->
     <section id="produtos-disponiveis" class="ativo">
-      <h2>Sobre a Loja</h2>
-      <p>A Use Dude é uma loja de moda independente que valoriza estilo, conforto e autenticidade. Todas as peças são escolhidas com carinho por Duda Macedo para refletir a personalidade única de cada cliente.</p>
-
       <h2>Produtos Disponíveis</h2>
       
       <div class="carrossel-principal">
         <!-- Setas de navegação entre looks -->
-        <div class="seta seta-principal esquerda" onclick="mudarLook(-1)">&#10094;</div>
-        <div class="seta seta-principal direita" onclick="mudarLook(1)">&#10095;</div>
+        <div class="seta seta-principal esquerda" onclick="mudarLook(-1)">❮</div>
+        <div class="seta seta-principal direita" onclick="mudarLook(1)">❯</div>
         
         <!-- Bata Ketylle -->
         <div class="look-container ativo" data-look="Bata Ketylle">
           <div class="carrossel-imagens">
-            <img src="src/img/bata-ketylle-1.jpeg" alt="Bata Ketylle 1" class="ativo">
-            <img src="src/img/bata-ketylle-2.jpeg" alt="Bata Ketylle 2">
-            <img src="src/img/bata-ketylle-3.jpeg" alt="Bata Ketylle 3">
+            <img src="src/img/bata-ketylle-1.jpeg" alt="Bata Ketylle 1" class="">
+            <img src="src/img/bata-ketylle-2.jpeg" alt="Bata Ketylle 2" class="ativo">
+            <img src="src/img/bata-ketylle-3.jpeg" alt="Bata Ketylle 3" class="">
           </div>
           <div class="nome-look">Bata Ketylle</div>
         </div>
@@ -409,8 +535,8 @@
         <!-- Vestido Lolla -->
         <div class="look-container" data-look="Vestido Lolla">
           <div class="carrossel-imagens">
-            <img src="src/img/vestido-lolla.jpeg" alt="Vestido Lolla 1" class="ativo">
-            <img src="src/img/vestido-lolla-2.jpeg" alt="Vestido Lolla 2">
+            <img src="src/img/vestido-lolla.jpeg" alt="Vestido Lolla 1" class="">
+            <img src="src/img/vestido-lolla-2.jpeg" alt="Vestido Lolla 2" class="ativo">
           </div>
           <div class="nome-look">Vestido Lolla</div>
         </div>
@@ -418,9 +544,9 @@
         <!-- Conjunto Talita -->
         <div class="look-container" data-look="Conjunto Talita">
           <div class="carrossel-imagens">
-            <img src="src/img/conjunto-talita.jpeg" alt="Conjunto Talita 1" class="ativo">
-            <img src="src/img/conjunto-talita-2.jpeg" alt="Conjunto Talita 2">
-            <img src="src/img/conjunto-talita-3.jpeg" alt="Conjunto Talita 3">
+            <img src="src/img/conjunto-talita.jpeg" alt="Conjunto Talita 1" class="">
+            <img src="src/img/conjunto-talita-2.jpeg" alt="Conjunto Talita 2" class="ativo">
+            <img src="src/img/conjunto-talita-3.jpeg" alt="Conjunto Talita 3" class="">
           </div>
           <div class="nome-look">Conjunto Talita</div>
         </div>
@@ -428,9 +554,9 @@
         <!-- Vestido Ágatha -->
         <div class="look-container" data-look="Vestido Ágatha">
           <div class="carrossel-imagens">
-            <img src="src/img/vestido-ágatha.jpeg" alt="Vestido Ágatha 1" class="ativo">
-            <img src="src/img/vestido-ágatha-2.jpeg" alt="Vestido Ágatha 2">
-            <img src="src/img/vestido-ágatha-3.jpeg" alt="Vestido Ágatha 3">
+            <img src="src/img/vestido-ágatha.jpeg" alt="Vestido Ágatha 1" class="">
+            <img src="src/img/vestido-ágatha-2.jpeg" alt="Vestido Ágatha 2" class="ativo">
+            <img src="src/img/vestido-ágatha-3.jpeg" alt="Vestido Ágatha 3" class="">
           </div>
           <div class="nome-look">Vestido Ágatha</div>
         </div>
@@ -446,9 +572,9 @@
         <!-- Calça Anny -->
         <div class="look-container" data-look="Calça Anny">
           <div class="carrossel-imagens">
-            <img src="src/img/calça-anny.jpeg" alt="Calça Anny 1" class="ativo">
-            <img src="src/img/calça-anny-2.jpeg" alt="Calça Anny 2">
-            <img src="src/img/calça-anny-3.jpeg" alt="Calça Anny 3">
+            <img src="src/img/calça-anny.jpeg" alt="Calça Anny 1" class="">
+            <img src="src/img/calça-anny-2.jpeg" alt="Calça Anny 2" class="ativo">
+            <img src="src/img/calça-anny-3.jpeg" alt="Calça Anny 3" class="">
           </div>
           <div class="nome-look">Calça Anny</div>
         </div>
@@ -472,10 +598,10 @@
         <!-- Macacão Agnes -->
         <div class="look-container" data-look="Macacão Agnes">
           <div class="carrossel-imagens">
-            <img src="src/img/macacão-agnes.jpeg" alt="Macacão Agnes 1" class="ativo">
-            <img src="src/img/macacão-agnes-1.jpeg" alt="Macacão Agnes 2">
-            <img src="src/img/macacão-agnes-2.jpeg" alt="Macacão Agnes 3">
-            <img src="src/img/macacão-agnes-3.jpeg" alt="Macacão Agnes 4">
+            <img src="src/img/macacão-agnes.jpeg" alt="Macacão Agnes 1" class="">
+            <img src="src/img/macacão-agnes-1.jpeg" alt="Macacão Agnes 2" class="ativo">
+            <img src="src/img/macacão-agnes-2.jpeg" alt="Macacão Agnes 3" class="">
+            <img src="src/img/macacão-agnes-3.jpeg" alt="Macacão Agnes 4" class="">
           </div>
           <div class="nome-look">Macacão Agnes</div>
         </div>
@@ -496,8 +622,8 @@
       
       <div class="carrossel-principal">
         <!-- Setas de navegação entre looks -->
-        <div class="seta seta-principal esquerda" onclick="mudarMaisVendidos(-1)">&#10094;</div>
-        <div class="seta seta-principal direita" onclick="mudarMaisVendidos(1)">&#10095;</div>
+        <div class="seta seta-principal esquerda" onclick="mudarMaisVendidos(-1)">❮</div>
+        <div class="seta seta-principal direita" onclick="mudarMaisVendidos(1)">❯</div>
         
         <!-- Vestido Flora -->
         <div class="look-container ativo" data-look="Vestido Flora">
@@ -511,10 +637,10 @@
         <!-- Macacão Agnes -->
         <div class="look-container" data-look="Macacão Agnes">
           <div class="carrossel-imagens">
-            <img src="src/img/macacão-agnes.jpeg" alt="Macacão Agnes 1" class="ativo">
-            <img src="src/img/macacão-agnes-1.jpeg" alt="Macacão Agnes 2">
-            <img src="src/img/macacão-agnes-2.jpeg" alt="Macacão Agnes 3">
-            <img src="src/img/macacão-agnes-3.jpeg" alt="Macacão Agnes 4">
+            <img src="src/img/macacão-agnes.jpeg" alt="Macacão Agnes 1" class="">
+            <img src="src/img/macacão-agnes-1.jpeg" alt="Macacão Agnes 2" class="ativo">
+            <img src="src/img/macacão-agnes-2.jpeg" alt="Macacão Agnes 3" class="">
+            <img src="src/img/macacão-agnes-3.jpeg" alt="Macacão Agnes 4" class="">
           </div>
           <div class="nome-look">Macacão Agnes</div>
           <p class="texto-destaque">Macacão Agnes elegante e casual, pronto para se sentir diva!!</p>
@@ -528,8 +654,7 @@
         <h2>Sobre a Duda</h2>
         <img src="src/img/duda-foto.jpeg" alt="Duda Macedo" class="img-duda" />
         <p>
-          Apaixonada pelo o que faço, comecei com a loja online e consegui expandir para o físico após 2 anos, com muito esforço e dedicação!!<br />
-          Jovem de apenas 23 anos apaixonada pelas minhas clientes vestindo Use Dude, venha fazer parte do nosso grupinho!!
+          A Use Dude é uma loja de roupas femininas criada para vestir mulheres com o intuito de gerar confiança e autoestima. Por 2 anos eu fiz acontecer dentro de um quarto na minha própria casa, mas com propósito, amor e dedicação ela ganhou seu espaço físico. E hoje seguimos ganhando reconhecimento e fazendo nosso time crescer cada dia mais. E será uma honra ter você no time das maravilhosas que escolhem se vestir Use Dude!
         </p>
       </div>
     </section>
@@ -547,7 +672,7 @@
     <!-- Feedbacks -->
     <section id="feedbacks">
       <h2>Feedbacks</h2>
-      <p style="font-size: 1.5rem; text-align: center; margin-bottom: 30px;">Alguns feedbacks das nossas clientes que amam!</p>
+      <p style="font-size: 1.5rem; text-align: center; margin-bottom: 30px;">Alguns feedbacks das nossas clientes!</p>
       
       <div class="carrossel-feedbacks">
         <div class="feedback-container ativo">
@@ -584,8 +709,8 @@
                 <img src="src/img/feedback10.jpeg" alt="Feedback 10">
               </div>
             </div>
-            <div class="seta esquerda" onclick="prevFeedbackSlide()">&#10094;</div>
-            <div class="seta direita" onclick="nextFeedbackSlide()">&#10095;</div>
+            <div class="seta esquerda" onclick="prevFeedbackSlide()">❮</div>
+            <div class="seta direita" onclick="nextFeedbackSlide()">❯</div>
           </div>
           <div class="feedback-dots"></div>
         </div>
@@ -606,22 +731,16 @@
     </section>
 
     <!-- Entregas -->
-    <section id="entregas">
-      <h2>Entregas</h2>
+    <section id="entregas" style="text-align: center;">
+      <h2>Entregas 🚚</h2>
       <p class="texto-destaque">Loja Fisica - Uberlândia, MG</p>
       <p class="texto-destaque">Nossa localização: Av. José Abdulmassih, 681 - Shoppink Park</p>
       
-      <p class="texto-negrito">Como são realizadas as entregas em UBERLÂNDIA-MG:</p>
-      <ul class="lista-pagamentos">
-        <li>As entregas em Uberlândia são realizadas de Segunda a Sábado das 08:00 as 20:00hrs</li>
-        <li>O horário será combinado com a cliente e a mesma será avisada quando a encomenda sair para entrega</li>
-        <li>O valor da taxa varia entre $10 a $15 dependendo do bairro</li>
-      </ul>
-      
-      <p class="texto-negrito">Como são realizados os envios para ITUIUTABA-MG:</p>
-      <ul class="lista-pagamentos">
-        <li>O dia da saída irá depender da demanda de encomendas, essa informação será comunicado a cliente no ato da compra.</li>
-        <li>O valor da taxa é $15 sendo entregue no endereço desejado</li>
+      <p class="texto-negrito">Como são realizadas as entregas:</p>
+      <ul class="lista-pagamentos" style="display: inline-block; text-align: left; margin: 0 auto; padding-left: 20px;">
+        <li>Envio para todo Brasil via Correios - envie seu CEP pelo WhatsApp para calcular frete 
+        </li>
+        <li>Envio para Ituiutaba semanalmente - verificar próximo dia de envio pelo WhatsApp</li>
       </ul>
     </section>
   </div>
