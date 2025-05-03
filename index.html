@@ -25,7 +25,10 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: relative;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
     }
     
     .header-container {
@@ -64,7 +67,6 @@
       font-size: 0.8rem;
       white-space: nowrap;
       transition: background-color 0.3s;
-      text-decoration: none;
     }
     
     .btn-categoria:hover {
@@ -81,10 +83,19 @@
       font-weight: bold;
     }
     
+    .conteudo-principal {
+      margin-top: 120px;
+    }
+    
     section {
       padding: 30px 20px;
       max-width: 1200px;
       margin: 0 auto;
+      display: none;
+    }
+    
+    section.ativo {
+      display: block;
     }
     
     h2 {
@@ -93,18 +104,18 @@
       text-align: center;
     }
     
-    .carrossel-principal {
+    .carrossel-principal, .carrossel-feedbacks {
       position: relative;
       max-width: 800px;
       margin: 30px auto;
     }
     
-    .look-container {
+    .look-container, .feedback-container {
       display: none;
       text-align: center;
     }
     
-    .look-container.ativo {
+    .look-container.ativo, .feedback-container.ativo {
       display: block;
     }
     
@@ -115,6 +126,41 @@
       align-items: center;
       justify-content: center;
       margin: 20px 0;
+    }
+    
+    /* Estilo modificado para o carrossel de feedbacks */
+    .carrossel-feedback-imagens {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      height: 500px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .feedback-slides-container {
+      display: flex;
+      height: 100%;
+      transition: transform 0.5s ease-in-out;
+    }
+    
+    .feedback-slide {
+      min-width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .feedback-slide img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
     }
     
     .carrossel-imagens img {
@@ -177,7 +223,6 @@
       padding: 30px;
       margin-top: 30px;
       text-align: center;
-      display: none;
     }
     
     .img-duda {
@@ -197,9 +242,8 @@
       margin-top: 30px;
     }
     
-    .btn-whatsapp {
+    .btn-whatsapp, .btn-instagram {
       position: fixed;
-      bottom: 30px;
       right: 30px;
       background-color: #25D366;
       color: white;
@@ -212,8 +256,66 @@
       z-index: 100;
     }
     
-    .btn-whatsapp img {
+    .btn-whatsapp {
+      bottom: 30px;
+    }
+    
+    .btn-instagram {
+      background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+      bottom: 90px;
+    }
+    
+    .btn-whatsapp img, .btn-instagram img {
       margin-right: 10px;
+    }
+    
+    .lista-pagamentos {
+      list-style-type: none;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .lista-pagamentos li {
+      position: relative;
+      padding-left: 25px;
+      margin-bottom: 10px;
+    }
+    
+    .lista-pagamentos li:before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: #333;
+    }
+    
+    .texto-destaque {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+    
+    .texto-negrito {
+      font-weight: bold;
+    }
+    
+    /* Estilos para os dots de navegação do feedback */
+    .feedback-dots {
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+    }
+    
+    .feedback-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #ccc;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .feedback-dot.active {
+      background-color: #d3d3d3;
     }
     
     @media (max-width: 768px) {
@@ -221,6 +323,7 @@
         flex-direction: column;
         text-align: center;
         gap: 15px;
+        padding-bottom: 20px;
       }
       
       .header-container {
@@ -235,13 +338,26 @@
         justify-content: flex-start;
       }
       
+      .conteudo-principal {
+        margin-top: 180px;
+      }
+      
       .carrossel-imagens img {
         max-height: 50vh;
+      }
+      
+      .carrossel-feedback-imagens {
+        height: 350px;
       }
       
       .seta-principal {
         font-size: 2rem;
         padding: 10px;
+      }
+      
+      .btn-instagram {
+        right: 30px;
+        bottom: 90px;
       }
     }
   </style>
@@ -257,134 +373,258 @@
     </div>
     
     <div class="menu-categorias">
-      <a href="produtos.html" class="btn-categoria">Produtos Disponíveis</a>
-      <a href="mais-vendidos.html" class="btn-categoria">Mais vendidos</a>
-      <a href="quem-somos.html" class="btn-categoria">Quem somos</a>
-      <a href="redes-sociais.html" class="btn-categoria">Redes Sociais</a>
-      <a href="feedbacks.html" class="btn-categoria">Feedbacks</a>
-      <a href="pagamentos.html" class="btn-categoria">Formas de Pagamento</a>
-      <a href="entregas.html" class="btn-categoria">Entregas</a>
-      <a href="loja-fisica.html" class="btn-categoria">Loja Física</a>
+      <button class="btn-categoria" onclick="mostrarSecao('produtos-disponiveis')">Produtos Disponíveis</button>
+      <button class="btn-categoria" onclick="mostrarSecao('mais-vendidos')">Mais vendidos</button>
+      <button class="btn-categoria" onclick="mostrarSecao('quem-somos')">Quem somos</button>
+      <button class="btn-categoria" onclick="mostrarSecao('redes-sociais')">Redes Sociais</button>
+      <button class="btn-categoria" onclick="mostrarSecao('feedbacks')">Feedbacks</button>
+      <button class="btn-categoria" onclick="mostrarSecao('pagamentos')">Formas de Pagamento</button>
+      <button class="btn-categoria" onclick="mostrarSecao('entregas')">Entregas</button>
     </div>
-    
-    <button class="btn-sobre-duda" onclick="toggleSobreDuda()">Quem somos</button>
   </header>
 
-  <section>
-    <h2>Sobre a Loja</h2>
-    <p>A Use Dude é uma loja de moda independente que valoriza estilo, conforto e autenticidade. Todas as peças são escolhidas com carinho por Duda Macedo para refletir a personalidade única de cada cliente.</p>
+  <div class="conteudo-principal">
+    <!-- Página Inicial/Produtos Disponíveis -->
+    <section id="produtos-disponiveis" class="ativo">
+      <h2>Sobre a Loja</h2>
+      <p>A Use Dude é uma loja de moda independente que valoriza estilo, conforto e autenticidade. Todas as peças são escolhidas com carinho por Duda Macedo para refletir a personalidade única de cada cliente.</p>
 
-    <h2>Produtos Disponíveis</h2>
-    
-    <div class="carrossel-principal">
-      <!-- Setas de navegação entre looks -->
-      <div class="seta seta-principal esquerda" onclick="mudarLook(-1)">&#10094;</div>
-      <div class="seta seta-principal direita" onclick="mudarLook(1)">&#10095;</div>
+      <h2>Produtos Disponíveis</h2>
       
-      <!-- Bata Ketylle -->
-      <div class="look-container ativo" data-look="Bata Ketylle">
-        <div class="carrossel-imagens">
-          <img src="src/img/bata-ketylle-1.jpeg" alt="Bata Ketylle 1" class="ativo">
-          <img src="src/img/bata-ketylle-2.jpeg" alt="Bata Ketylle 2">
-          <img src="src/img/bata-ketylle-3.jpeg" alt="Bata Ketylle 3">
+      <div class="carrossel-principal">
+        <!-- Setas de navegação entre looks -->
+        <div class="seta seta-principal esquerda" onclick="mudarLook(-1)">&#10094;</div>
+        <div class="seta seta-principal direita" onclick="mudarLook(1)">&#10095;</div>
+        
+        <!-- Bata Ketylle -->
+        <div class="look-container ativo" data-look="Bata Ketylle">
+          <div class="carrossel-imagens">
+            <img src="src/img/bata-ketylle-1.jpeg" alt="Bata Ketylle 1" class="ativo">
+            <img src="src/img/bata-ketylle-2.jpeg" alt="Bata Ketylle 2">
+            <img src="src/img/bata-ketylle-3.jpeg" alt="Bata Ketylle 3">
+          </div>
+          <div class="nome-look">Bata Ketylle</div>
         </div>
-        <div class="nome-look">Bata Ketylle</div>
-      </div>
-      
-      <!-- Vestido Lolla -->
-      <div class="look-container" data-look="Vestido Lolla">
-        <div class="carrossel-imagens">
-          <img src="src/img/vestido-lolla.jpeg" alt="Vestido Lolla 1" class="ativo">
-          <img src="src/img/vestido-lolla-2.jpeg" alt="Vestido Lolla 2">
+        
+        <!-- Vestido Lolla -->
+        <div class="look-container" data-look="Vestido Lolla">
+          <div class="carrossel-imagens">
+            <img src="src/img/vestido-lolla.jpeg" alt="Vestido Lolla 1" class="ativo">
+            <img src="src/img/vestido-lolla-2.jpeg" alt="Vestido Lolla 2">
+          </div>
+          <div class="nome-look">Vestido Lolla</div>
         </div>
-        <div class="nome-look">Vestido Lolla</div>
-      </div>
-      
-      <!-- Conjunto Talita -->
-      <div class="look-container" data-look="Conjunto Talita">
-        <div class="carrossel-imagens">
-          <img src="src/img/conjunto-talita.jpeg" alt="Conjunto Talita 1" class="ativo">
-          <img src="src/img/conjunto-talita-2.jpeg" alt="Conjunto Talita 2">
-          <img src="src/img/conjunto-talita-3.jpeg" alt="Conjunto Talita 3">
+        
+        <!-- Conjunto Talita -->
+        <div class="look-container" data-look="Conjunto Talita">
+          <div class="carrossel-imagens">
+            <img src="src/img/conjunto-talita.jpeg" alt="Conjunto Talita 1" class="ativo">
+            <img src="src/img/conjunto-talita-2.jpeg" alt="Conjunto Talita 2">
+            <img src="src/img/conjunto-talita-3.jpeg" alt="Conjunto Talita 3">
+          </div>
+          <div class="nome-look">Conjunto Talita</div>
         </div>
-        <div class="nome-look">Conjunto Talita</div>
-      </div>
-      
-      <!-- Vestido Ágatha -->
-      <div class="look-container" data-look="Vestido Ágatha">
-        <div class="carrossel-imagens">
-          <img src="src/img/vestido-ágatha.jpeg" alt="Vestido Ágatha 1" class="ativo">
-          <img src="src/img/vestido-ágatha-2.jpeg" alt="Vestido Ágatha 2">
-          <img src="src/img/vestido-ágatha-3.jpeg" alt="Vestido Ágatha 3">
+        
+        <!-- Vestido Ágatha -->
+        <div class="look-container" data-look="Vestido Ágatha">
+          <div class="carrossel-imagens">
+            <img src="src/img/vestido-ágatha.jpeg" alt="Vestido Ágatha 1" class="ativo">
+            <img src="src/img/vestido-ágatha-2.jpeg" alt="Vestido Ágatha 2">
+            <img src="src/img/vestido-ágatha-3.jpeg" alt="Vestido Ágatha 3">
+          </div>
+          <div class="nome-look">Vestido Ágatha</div>
         </div>
-        <div class="nome-look">Vestido Ágatha</div>
-      </div>
-      
-      <!-- Calça Isabela -->
-      <div class="look-container" data-look="Calça Isabela">
-        <div class="carrossel-imagens">
-          <img src="src/img/calça-isabela.jpeg" alt="Calça Isabela" class="ativo">
+        
+        <!-- Calça Isabela -->
+        <div class="look-container" data-look="Calça Isabela">
+          <div class="carrossel-imagens">
+            <img src="src/img/calça-isabela.jpeg" alt="Calça Isabela" class="ativo">
+          </div>
+          <div class="nome-look">Calça Isabela</div>
         </div>
-        <div class="nome-look">Calça Isabela</div>
-      </div>
-      
-      <!-- Calça Anny -->
-      <div class="look-container" data-look="Calça Anny">
-        <div class="carrossel-imagens">
-          <img src="src/img/calça-anny.jpeg" alt="Calça Anny 1" class="ativo">
-          <img src="src/img/calça-anny-2.jpeg" alt="Calça Anny 2">
-          <img src="src/img/calça-anny-3.jpeg" alt="Calça Anny 3">
+        
+        <!-- Calça Anny -->
+        <div class="look-container" data-look="Calça Anny">
+          <div class="carrossel-imagens">
+            <img src="src/img/calça-anny.jpeg" alt="Calça Anny 1" class="ativo">
+            <img src="src/img/calça-anny-2.jpeg" alt="Calça Anny 2">
+            <img src="src/img/calça-anny-3.jpeg" alt="Calça Anny 3">
+          </div>
+          <div class="nome-look">Calça Anny</div>
         </div>
-        <div class="nome-look">Calça Anny</div>
-      </div>
-      
-      <!-- Vestido Nicolly -->
-      <div class="look-container" data-look="Vestido Nicolly">
-        <div class="carrossel-imagens">
-          <img src="src/img/vestido-nicolly.jpeg" alt="Vestido Nicolly" class="ativo">
+        
+        <!-- Vestido Nicolly -->
+        <div class="look-container" data-look="Vestido Nicolly">
+          <div class="carrossel-imagens">
+            <img src="src/img/vestido-nicolly.jpeg" alt="Vestido Nicolly" class="ativo">
+          </div>
+          <div class="nome-look">Vestido Nicolly</div>
         </div>
-        <div class="nome-look">Vestido Nicolly</div>
-      </div>
-      
-      <!-- Blusa Lara -->
-      <div class="look-container" data-look="Blusa Lara">
-        <div class="carrossel-imagens">
-          <img src="src/img/blusa-lara.jpeg" alt="Blusa Lara" class="ativo">
+        
+        <!-- Blusa Lara -->
+        <div class="look-container" data-look="Blusa Lara">
+          <div class="carrossel-imagens">
+            <img src="src/img/blusa-lara.jpeg" alt="Blusa Lara" class="ativo">
+          </div>
+          <div class="nome-look">Blusa Lara</div>
         </div>
-        <div class="nome-look">Blusa Lara</div>
-      </div>
-      
-      <!-- Macacão Agnes -->
-      <div class="look-container" data-look="Macacão Agnes">
-        <div class="carrossel-imagens">
-          <img src="src/img/macacão-agnes.jpeg" alt="Macacão Agnes 1" class="ativo">
-          <img src="src/img/macacão-agnes-1.jpeg" alt="Macacão Agnes 2">
-          <img src="src/img/macacão-agnes-2.jpeg" alt="Macacão Agnes 3">
-          <img src="src/img/macacão-agnes-3.jpeg" alt="Macacão Agnes 4">
+        
+        <!-- Macacão Agnes -->
+        <div class="look-container" data-look="Macacão Agnes">
+          <div class="carrossel-imagens">
+            <img src="src/img/macacão-agnes.jpeg" alt="Macacão Agnes 1" class="ativo">
+            <img src="src/img/macacão-agnes-1.jpeg" alt="Macacão Agnes 2">
+            <img src="src/img/macacão-agnes-2.jpeg" alt="Macacão Agnes 3">
+            <img src="src/img/macacão-agnes-3.jpeg" alt="Macacão Agnes 4">
+          </div>
+          <div class="nome-look">Macacão Agnes</div>
         </div>
-        <div class="nome-look">Macacão Agnes</div>
-      </div>
-      
-      <!-- Vestido Flora -->
-      <div class="look-container" data-look="Vestido Flora">
-        <div class="carrossel-imagens">
-          <img src="src/img/vestido-flora.jpeg" alt="Vestido Flora" class="ativo">
+        
+        <!-- Vestido Flora -->
+        <div class="look-container" data-look="Vestido Flora">
+          <div class="carrossel-imagens">
+            <img src="src/img/vestido-flora.jpeg" alt="Vestido Flora" class="ativo">
+          </div>
+          <div class="nome-look">Vestido Flora</div>
         </div>
-        <div class="nome-look">Vestido Flora</div>
       </div>
-    </div>
+    </section>
 
-    <p style="text-align: center; margin-top: 30px;">Quer ver mais peças ou fazer um pedido? Fale diretamente com a Duda no Whatsapp ou no Instagram da Loja!!</p>
-  </section>
+    <!-- Mais Vendidos -->
+    <section id="mais-vendidos">
+      <h2>Mais vendidos</h2>
+      
+      <div class="carrossel-principal">
+        <!-- Setas de navegação entre looks -->
+        <div class="seta seta-principal esquerda" onclick="mudarMaisVendidos(-1)">&#10094;</div>
+        <div class="seta seta-principal direita" onclick="mudarMaisVendidos(1)">&#10095;</div>
+        
+        <!-- Vestido Flora -->
+        <div class="look-container ativo" data-look="Vestido Flora">
+          <div class="carrossel-imagens">
+            <img src="src/img/vestido-flora.jpeg" alt="Vestido Flora" class="ativo">
+          </div>
+          <div class="nome-look">Vestido Flora</div>
+          <p class="texto-destaque">Vestido Flora nosso Best Seller da loja em vendas</p>
+        </div>
+        
+        <!-- Macacão Agnes -->
+        <div class="look-container" data-look="Macacão Agnes">
+          <div class="carrossel-imagens">
+            <img src="src/img/macacão-agnes.jpeg" alt="Macacão Agnes 1" class="ativo">
+            <img src="src/img/macacão-agnes-1.jpeg" alt="Macacão Agnes 2">
+            <img src="src/img/macacão-agnes-2.jpeg" alt="Macacão Agnes 3">
+            <img src="src/img/macacão-agnes-3.jpeg" alt="Macacão Agnes 4">
+          </div>
+          <div class="nome-look">Macacão Agnes</div>
+          <p class="texto-destaque">Macacão Agnes elegante e casual, pronto para se sentir diva!!</p>
+        </div>
+      </div>
+    </section>
 
-  <section id="sobre-duda" class="sobre-duda">
-    <h2>Sobre a Duda</h2>
-    <img src="src/img/duda-foto.jpeg" alt="Duda Macedo" class="img-duda" />
-    <p>
-      Apaixonada pelo o que faço, comecei com a loja online e consegui expandir para o físico após 2 anos, com muito esforço e dedicação!!<br />
-      Jovem de apenas 23 anos apaixonada pelas minhas clientes vestindo Use Dude, venha fazer parte do nosso grupinho!!
-    </p>
-  </section>
+    <!-- Quem Somos -->
+    <section id="quem-somos">
+      <div class="sobre-duda">
+        <h2>Sobre a Duda</h2>
+        <img src="src/img/duda-foto.jpeg" alt="Duda Macedo" class="img-duda" />
+        <p>
+          Apaixonada pelo o que faço, comecei com a loja online e consegui expandir para o físico após 2 anos, com muito esforço e dedicação!!<br />
+          Jovem de apenas 23 anos apaixonada pelas minhas clientes vestindo Use Dude, venha fazer parte do nosso grupinho!!
+        </p>
+      </div>
+    </section>
+
+    <!-- Redes Sociais -->
+    <section id="redes-sociais">
+      <h2>Redes Sociais</h2>
+      <p>Siga-nos nas redes sociais para ficar por dentro das novidades!</p>
+      <div style="text-align: center; margin-top: 20px;">
+        <a href="https://www.instagram.com/usedude_/" class="btn-categoria" target="_blank" style="display: inline-block; margin: 10px;">Instagram da Loja</a>
+        <a href="https://wa.me/5534996827550?text=Oii%20Duda,%20vim%20do%20site%20Use%20Dude%20e%20gostaria%20de%20fazer%20um%20pedido!!%20" class="btn-categoria" target="_blank" style="display: inline-block; margin: 10px;">Nosso WhatsApp</a>
+      </div>
+    </section>
+
+    <!-- Feedbacks -->
+    <section id="feedbacks">
+      <h2>Feedbacks</h2>
+      <p style="font-size: 1.5rem; text-align: center; margin-bottom: 30px;">Alguns feedbacks das nossas clientes que amam!</p>
+      
+      <div class="carrossel-feedbacks">
+        <div class="feedback-container ativo">
+          <div class="carrossel-feedback-imagens">
+            <div class="feedback-slides-container">
+              <div class="feedback-slide">
+                <img src="src/img/feedback1.jpeg" alt="Feedback 1">
+              </div>
+              <div class="feedback-slide">
+                <img src="src/img/feedback2.jpeg" alt="Feedback 2">
+              </div>
+              <div class="feedback-slide">
+                <img src="src/img/feedback3.jpeg" alt="Feedback 3">
+              </div>
+              <div class="feedback-slide">
+                <img src="src/img/feedback4.jpeg" alt="Feedback 4">
+              </div>
+              <div class="feedback-slide">
+                <img src="src/img/feedback5.jpeg" alt="Feedback 5">
+              </div>
+              <div class="feedback-slide">
+                <img src="src/img/feedback6.jpeg" alt="Feedback 6">
+              </div>
+              <div class="feedback-slide">
+                <img src="src/img/feedback7.jpeg" alt="Feedback 7">
+              </div>
+              <div class="feedback-slide">
+                <img src="src/img/feedback8.jpeg" alt="Feedback 8">
+              </div>
+              <div class="feedback-slide">
+                <img src="src/img/feedback9.jpeg" alt="Feedback 9">
+              </div>
+              <div class="feedback-slide">
+                <img src="src/img/feedback10.jpeg" alt="Feedback 10">
+              </div>
+            </div>
+            <div class="seta esquerda" onclick="prevFeedbackSlide()">&#10094;</div>
+            <div class="seta direita" onclick="nextFeedbackSlide()">&#10095;</div>
+          </div>
+          <div class="feedback-dots"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formas de Pagamento -->
+    <section id="pagamentos">
+      <h2>Formas de Pagamento</h2>
+      <p>Nossas formas de PAGAMENTO:</p>
+      <ul class="lista-pagamentos">
+        <li>Dinheiro</li>
+        <li>Pix</li>
+        <li>Cartão de Crédito</li>
+        <li>Transferência</li>
+        <li>Link de pagamento</li>
+      </ul>
+    </section>
+
+    <!-- Entregas -->
+    <section id="entregas">
+      <h2>Entregas</h2>
+      <p class="texto-destaque">Loja Fisica - Uberlândia, MG</p>
+      <p class="texto-destaque">Nossa localização: Av. José Abdulmassih, 681 - Shoppink Park</p>
+      
+      <p class="texto-negrito">Como são realizadas as entregas em UBERLÂNDIA-MG:</p>
+      <ul class="lista-pagamentos">
+        <li>As entregas em Uberlândia são realizadas de Segunda a Sábado das 08:00 as 20:00hrs</li>
+        <li>O horário será combinado com a cliente e a mesma será avisada quando a encomenda sair para entrega</li>
+        <li>O valor da taxa varia entre $10 a $15 dependendo do bairro</li>
+      </ul>
+      
+      <p class="texto-negrito">Como são realizados os envios para ITUIUTABA-MG:</p>
+      <ul class="lista-pagamentos">
+        <li>O dia da saída irá depender da demanda de encomendas, essa informação será comunicado a cliente no ato da compra.</li>
+        <li>O valor da taxa é $15 sendo entregue no endereço desejado</li>
+      </ul>
+    </section>
+  </div>
 
   <footer>
     <p>&copy; 2025 Use Dude - Desenvolvido por Geovanna Moura</p>
@@ -395,14 +635,50 @@
     Chamar no WhatsApp
   </a>
 
+  <a href="https://www.instagram.com/usedude_/" class="btn-instagram" target="_blank">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/instagram-new.png" alt="Instagram" />
+    Instagram
+  </a>
+
   <script>
     // Variáveis globais
     let lookAtual = 0;
-    let looks = document.querySelectorAll('.look-container');
+    let looks = document.querySelectorAll('#produtos-disponiveis .look-container');
+    let maisVendidosAtual = 0;
+    let maisVendidos = document.querySelectorAll('#mais-vendidos .look-container');
     let intervalos = [];
+    let feedbackInterval;
+    
+    // Carrossel de feedbacks
+    let currentFeedbackSlide = 0;
+    const feedbackSlides = document.querySelectorAll('.feedback-slide');
+    const feedbackSlideCount = feedbackSlides.length;
+    const feedbackSlidesContainer = document.querySelector('.feedback-slides-container');
+    const feedbackDotsContainer = document.querySelector('.feedback-dots');
+    
+    // Mostra apenas a seção selecionada
+    function mostrarSecao(idSecao) {
+      // Esconde todas as seções
+      document.querySelectorAll('section').forEach(sec => {
+        sec.classList.remove('ativo');
+      });
+      
+      // Mostra apenas a seção selecionada
+      document.getElementById(idSecao).classList.add('ativo');
+      
+      // Rola para o topo da página
+      window.scrollTo({ top: 100, behavior: 'smooth' });
+      
+      // Se for a seção de feedbacks, reinicia o carrossel
+      if (idSecao === 'feedbacks') {
+        goToFeedbackSlide(0);
+        startFeedbackCarousel();
+      }
+    }
     
     // Inicializa os carrosséis
     function inicializarCarrosseis() {
+      // Carrossel produtos disponíveis
       looks.forEach((look, index) => {
         let imagens = look.querySelectorAll('.carrossel-imagens img');
         if (imagens.length > 1) {
@@ -414,6 +690,22 @@
           }, 5000);
         }
       });
+      
+      // Carrossel mais vendidos
+      maisVendidos.forEach((look, index) => {
+        let imagens = look.querySelectorAll('.carrossel-imagens img');
+        if (imagens.length > 1) {
+          let imgAtual = 0;
+          intervalos[index + looks.length] = setInterval(() => {
+            imagens[imgAtual].classList.remove('ativo');
+            imgAtual = (imgAtual + 1) % imagens.length;
+            imagens[imgAtual].classList.add('ativo');
+          }, 5000);
+        }
+      });
+      
+      // Inicializa o carrossel de feedbacks
+      initFeedbackCarousel();
     }
     
     // Muda o look principal
@@ -450,24 +742,100 @@
       }
     }
     
-    // Inicializa quando a página carrega
-    window.onload = function() {
-      inicializarCarrosseis();
-    };
-    
-    // Função para mostrar/ocultar a seção "Sobre a Duda" com scroll suave
-    function toggleSobreDuda() {
-      const sobreDuda = document.getElementById('sobre-duda');
-      const isHidden = sobreDuda.style.display === 'none' || sobreDuda.style.display === '';
+    // Muda os mais vendidos
+    function mudarMaisVendidos(direcao) {
+      // Para o intervalo do look atual
+      clearInterval(intervalos[maisVendidosAtual + looks.length]);
       
-      // Alterna a exibição
-      sobreDuda.style.display = isHidden ? 'block' : 'none';
+      // Esconde o look atual
+      maisVendidos[maisVendidosAtual].classList.remove('ativo');
       
-      // Se estiver mostrando, faz o scroll suave
-      if (isHidden) {
-        sobreDuda.scrollIntoView({ behavior: 'smooth' });
+      // Calcula o novo índice
+      maisVendidosAtual += direcao;
+      if (maisVendidosAtual >= maisVendidos.length) maisVendidosAtual = 0;
+      if (maisVendidosAtual < 0) maisVendidosAtual = maisVendidos.length - 1;
+      
+      // Mostra o novo look
+      maisVendidos[maisVendidosAtual].classList.add('ativo');
+      
+      // Se tiver apenas uma imagem, não precisa de intervalo
+      let imagens = maisVendidos[maisVendidosAtual].querySelectorAll('.carrossel-imagens img');
+      if (imagens.length > 1) {
+        // Reinicia o carrossel do novo look
+        imagens.forEach((img, i) => {
+          img.classList.remove('ativo');
+          if (i === 0) img.classList.add('ativo');
+        });
+        
+        let imgAtual = 0;
+        intervalos[maisVendidosAtual + looks.length] = setInterval(() => {
+          imagens[imgAtual].classList.remove('ativo');
+          imgAtual = (imgAtual + 1) % imagens.length;
+          imagens[imgAtual].classList.add('ativo');
+        }, 5000);
       }
     }
+    
+    // FUNÇÕES PARA O CARROSSEL DE FEEDBACKS
+    function initFeedbackCarousel() {
+      // Cria os dots de navegação
+      feedbackSlides.forEach((slide, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('feedback-dot');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+          goToFeedbackSlide(index);
+        });
+        feedbackDotsContainer.appendChild(dot);
+      });
+      
+      // Inicia o carrossel automático
+      startFeedbackCarousel();
+      
+      // Pausa o carrossel quando o mouse está sobre ele
+      const carouselContainer = document.querySelector('.carrossel-feedback-imagens');
+      carouselContainer.addEventListener('mouseenter', () => {
+        clearInterval(feedbackInterval);
+      });
+      
+      carouselContainer.addEventListener('mouseleave', () => {
+        startFeedbackCarousel();
+      });
+    }
+    
+    function goToFeedbackSlide(index) {
+      currentFeedbackSlide = (index + feedbackSlideCount) % feedbackSlideCount;
+      const offset = -currentFeedbackSlide * 100;
+      feedbackSlidesContainer.style.transform = `translateX(${offset}%)`;
+      
+      // Atualiza os dots ativos
+      document.querySelectorAll('.feedback-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentFeedbackSlide);
+      });
+    }
+    
+    function nextFeedbackSlide() {
+      goToFeedbackSlide(currentFeedbackSlide + 1);
+    }
+    
+    function prevFeedbackSlide() {
+      goToFeedbackSlide(currentFeedbackSlide - 1);
+    }
+    
+    function startFeedbackCarousel() {
+      clearInterval(feedbackInterval);
+      feedbackInterval = setInterval(() => {
+        nextFeedbackSlide();
+      }, 3000); // Muda a cada 3 segundos
+    }
+    
+    // Inicializa quando a página carrega
+    document.addEventListener('DOMContentLoaded', function() {
+      inicializarCarrosseis();
+      
+      // Mostra a primeira seção por padrão
+      document.querySelector('section').classList.add('ativo');
+    });
   </script>
 </body>
 </html>

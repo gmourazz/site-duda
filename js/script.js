@@ -1,342 +1,204 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Use Dude - Duda Macedo</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-    
-    body {
-      background-color: #f8f8f8;
-      color: #333;
-      line-height: 1.6;
-    }
-    
-    header {
-      background-color: #fff;
-      padding: 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .header-container {
-      display: flex;
-      align-items: center;
-    }
-    
-    .logo {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      margin-right: 15px;
-      object-fit: cover;
-    }
-    
-    h1 {
-      font-size: 1.8rem;
-      color: #d3d3d3;
-    }
-    
-    .btn-sobre-duda {
-      background-color: #d3d3d3;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    
-    section {
-      padding: 30px 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    h2 {
-      color: #d3d3d3;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    
-    .carrossel-principal {
-      position: relative;
-      max-width: 800px;
-      margin: 30px auto;
-    }
-    
-    .look-container {
-      display: none;
-      text-align: center;
-    }
-    
-    .look-container.ativo {
-      display: block;
-    }
-    
-    .carrossel-imagens {
-      position: relative;
-      min-height: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 20px 0;
-    }
-    
-    .carrossel-imagens img {
-      max-width: 100%;
-      max-height: 70vh;
-      width: auto;
-      height: auto;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    
-    .carrossel-imagens img.ativo {
-      opacity: 1;
-    }
-    
-    .seta {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 2rem;
-      color: white;
-      background-color: rgba(0,0,0,0.5);
-      cursor: pointer;
-      padding: 10px;
-      z-index: 10;
-      border-radius: 50%;
-      user-select: none;
-      transition: background-color 0.3s;
-    }
-    
-    .seta:hover {
-      background-color: rgba(0,0,0,0.7);
-    }
-    
-    .seta.esquerda {
-      left: 10px;
-    }
-    
-    .seta.direita {
-      right: 10px;
-    }
-    
-    .seta-principal {
-      font-size: 2.5rem;
-      background-color: rgba(0,0,0,0.7);
-      padding: 15px;
-    }
-    
-    .nome-look {
-      font-size: 1.5rem;
-      margin: 15px 0;
-      font-weight: bold;
-      color: #d3d3d3;
-    }
-    
-    .sobre-duda {
-      background-color: #fff;
-      padding: 30px;
-      margin-top: 30px;
-      text-align: center;
-      display: none;
-    }
-    
-    .sobre-duda.mostrar {
-      display: block;
-    }
-    
-    .img-duda {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 20px auto;
-      display: block;
-    }
-    
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #333;
-      color: white;
-      margin-top: 30px;
-    }
-    
-    .btn-whatsapp {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background-color: #25D366;
-      color: white;
-      padding: 15px;
-      border-radius: 50px;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      z-index: 100;
-    }
-    
-    .btn-whatsapp img {
-      margin-right: 10px;
-    }
-    
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .header-container {
-        margin-bottom: 15px;
-        justify-content: center;
-      }
-      
-      .carrossel-imagens img {
-        max-height: 50vh;
-      }
-      
-      .seta-principal {
-        font-size: 2rem;
-        padding: 10px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="header-container">
-      <img src="src/img/logo.jpeg" alt="Logo Use Dude" class="logo" />
-      <div>
-        <h1>Use Dude</h1>
-        <p>Moda com atitude por Duda Macedo</p>
-      </div>
-    </div>
-    <button class="btn-sobre-duda" onclick="toggleSobreDuda()">Quem somos</button>
-  </header>
+// Variáveis globais
+let lookAtual = 0;
+let looks = document.querySelectorAll('#produtos-disponiveis .look-container');
+let maisVendidosAtual = 0;
+let maisVendidos = document.querySelectorAll('#mais-vendidos .look-container');
+let intervalos = [];
+let feedbackInterval;
 
-  <section>
-    <h2>Sobre a Loja</h2>
-    <p>A Use Dude é uma loja de moda independente que valoriza estilo, conforto e autenticidade. Todas as peças são escolhidas com carinho por Duda Macedo para refletir a personalidade única de cada cliente.</p>
+// Carrossel de feedbacks
+let currentFeedbackSlide = 0;
+const feedbackSlides = document.querySelectorAll('.feedback-slide');
+const feedbackSlideCount = feedbackSlides.length;
+const feedbackCarousel = document.querySelector('.feedback-carousel');
+const feedbackDotsContainer = document.querySelector('.feedback-dots');
 
-    <h2>Produtos Disponíveis</h2>
+// Mostra apenas a seção selecionada
+function mostrarSecao(idSecao) {
+  // Esconde todas as seções
+  document.querySelectorAll('section').forEach(sec => {
+    sec.classList.remove('ativo');
+  });
+  
+  // Mostra apenas a seção selecionada
+  document.getElementById(idSecao).classList.add('ativo');
+  
+  // Rola para o topo da página
+  window.scrollTo({ top: 100, behavior: 'smooth' });
+  
+  // Se for a seção de feedbacks, reinicia o carrossel
+  if (idSecao === 'feedbacks') {
+    goToFeedbackSlide(0);
+    startFeedbackCarousel();
+  }
+}
+
+// Inicializa os carrosséis
+function inicializarCarrosseis() {
+  // Carrossel produtos disponíveis
+  looks.forEach((look, index) => {
+    let imagens = look.querySelectorAll('.carrossel-imagens img');
+    if (imagens.length > 1) {
+      let imgAtual = 0;
+      intervalos[index] = setInterval(() => {
+        imagens[imgAtual].classList.remove('ativo');
+        imgAtual = (imgAtual + 1) % imagens.length;
+        imagens[imgAtual].classList.add('ativo');
+      }, 5000);
+    }
+  });
+  
+  // Carrossel mais vendidos
+  maisVendidos.forEach((look, index) => {
+    let imagens = look.querySelectorAll('.carrossel-imagens img');
+    if (imagens.length > 1) {
+      let imgAtual = 0;
+      intervalos[index + looks.length] = setInterval(() => {
+        imagens[imgAtual].classList.remove('ativo');
+        imgAtual = (imgAtual + 1) % imagens.length;
+        imagens[imgAtual].classList.add('ativo');
+      }, 5000);
+    }
+  });
+  
+  // Inicializa o carrossel de feedbacks
+  initFeedbackCarousel();
+}
+
+// Muda o look principal
+function mudarLook(direcao) {
+  // Para o intervalo do look atual
+  clearInterval(intervalos[lookAtual]);
+  
+  // Esconde o look atual
+  looks[lookAtual].classList.remove('ativo');
+  
+  // Calcula o novo índice
+  lookAtual += direcao;
+  if (lookAtual >= looks.length) lookAtual = 0;
+  if (lookAtual < 0) lookAtual = looks.length - 1;
+  
+  // Mostra o novo look
+  looks[lookAtual].classList.add('ativo');
+  
+  // Se tiver apenas uma imagem, não precisa de intervalo
+  let imagens = looks[lookAtual].querySelectorAll('.carrossel-imagens img');
+  if (imagens.length > 1) {
+    // Reinicia o carrossel do novo look
+    imagens.forEach((img, i) => {
+      img.classList.remove('ativo');
+      if (i === 0) img.classList.add('ativo');
+    });
     
-    <div class="carrossel-principal">
-      <!-- Setas de navegação entre looks -->
-      <div class="seta seta-principal esquerda" onclick="mudarLook(-1)">&#10094;</div>
-      <div class="seta seta-principal direita" onclick="mudarLook(1)">&#10095;</div>
-      
-      <!-- Bata Ketylle -->
-      <div class="look-container ativo" data-look="Bata Ketylle">
-        <div class="carrossel-imagens">
-          <img src="src/img/bata-ketylle-1.jpeg" alt="Bata Ketylle 1" class="ativo">
-          <img src="src/img/bata-ketylle-2.jpeg" alt="Bata Ketylle 2">
-          <img src="src/img/bata-ketylle-3.jpeg" alt="Bata Ketylle 3">
-        </div>
-        <div class="nome-look">Bata Ketylle</div>
-      </div>
-      
-      <!-- Vestido Lolla -->
-      <div class="look-container" data-look="Vestido Lolla">
-        <div class="carrossel-imagens">
-          <img src="src/img/vestido-lolla.jpeg" alt="Vestido Lolla 1" class="ativo">
-          <img src="src/img/vestido-lolla-2.jpeg" alt="Vestido Lolla 2">
-        </div>
-        <div class="nome-look">Vestido Lolla</div>
-      </div>
-      
-      <!-- Conjunto Talita -->
-      <div class="look-container" data-look="Conjunto Talita">
-        <div class="carrossel-imagens">
-          <img src="src/img/conjunto-talita.jpeg" alt="Conjunto Talita 1" class="ativo">
-          <img src="src/img/conjunto-talita-2.jpeg" alt="Conjunto Talita 2">
-          <img src="src/img/conjunto-talita-3.jpeg" alt="Conjunto Talita 3">
-        </div>
-        <div class="nome-look">Conjunto Talita</div>
-      </div>
-      
-      <!-- Vestido Ágatha -->
-      <div class="look-container" data-look="Vestido Ágatha">
-        <div class="carrossel-imagens">
-          <img src="src/img/vestido-ágatha.jpeg" alt="Vestido Ágatha 1" class="ativo">
-          <img src="src/img/vestido-ágatha-2.jpeg" alt="Vestido Ágatha 2">
-          <img src="src/img/vestido-ágatha-3.jpeg" alt="Vestido Ágatha 3">
-        </div>
-        <div class="nome-look">Vestido Ágatha</div>
-      </div>
-      
-      <!-- Calça Isabela -->
-      <div class="look-container" data-look="Calça Isabela">
-        <div class="carrossel-imagens">
-          <img src="src/img/calça-isabela.jpeg" alt="Calça Isabela" class="ativo">
-        </div>
-        <div class="nome-look">Calça Isabela</div>
-      </div>
-      
-      <!-- Calça Anny -->
-      <div class="look-container" data-look="Calça Anny">
-        <div class="carrossel-imagens">
-          <img src="src/img/calça-anny.jpeg" alt="Calça Anny 1" class="ativo">
-          <img src="src/img/calça-anny-2.jpeg" alt="Calça Anny 2">
-          <img src="src/img/calça-anny-3.jpeg" alt="Calça Anny 3">
-        </div>
-        <div class="nome-look">Calça Anny</div>
-      </div>
-      
-      <!-- Vestido Nicolly -->
-      <div class="look-container" data-look="Vestido Nicolly">
-        <div class="carrossel-imagens">
-          <img src="src/img/vestido-nicolly.jpeg" alt="Vestido Nicolly" class="ativo">
-        </div>
-        <div class="nome-look">Vestido Nicolly</div>
-      </div>
-      
-      <!-- Blusa Lara -->
-      <div class="look-container" data-look="Blusa Lara">
-        <div class="carrossel-imagens">
-          <img src="src/img/blusa-lara.jpeg" alt="Blusa Lara" class="ativo">
-        </div>
-        <div class="nome-look">Blusa Lara</div>
-      </div>
-      
-      <!-- Macacão Agnes -->
-      <div class="look-container" data-look="Macacão Agnes">
-        <div class="carrossel-imagens">
-          <img src="src/img/macacão-agnes.jpeg" alt="Macacão Agnes 1" class="ativo">
-          <img src="src/img/macacão-agnes-1.jpeg" alt="Macacão Agnes 2">
-          <img src="src/img/macacão-agnes-2.jpeg" alt="Macacão Agnes 3">
-          <img src="src/img/macacão-agnes-3.jpeg" alt="Macacão Agnes 4">
-        </div>
-        <div class="nome-look">Macacão Agnes</div>
-      </div>
-      
-      <!-- Vestido Flora -->
-      <div class="look-container" data-look="Vestido Flora">
-        <div class="carrossel-imagens">
-          <img src="src/img/vestido-flora.jpeg" alt="Vestido Flora" class="ativo">
-        </div>
-        <div class="nome-look">Vestido Flora</div>
-      </div>
-    </div>
+    let imgAtual = 0;
+    intervalos[lookAtual] = setInterval(() => {
+      imagens[imgAtual].classList.remove('ativo');
+      imgAtual = (imgAtual + 1) % imagens.length;
+      imagens[imgAtual].classList.add('ativo');
+    }, 5000);
+  }
+}
 
-    <p style="text-align: center; margin-top: 30px;">Quer ver mais peças ou fazer um pedido? Fale diretamente com a Duda no Whatsapp ou no Instagram da Loja!!</p>
-  </section>
+// Muda os mais vendidos
+function mudarMaisVendidos(direcao) {
+  // Para o intervalo do look atual
+  clearInterval(intervalos[maisVendidosAtual + looks.length]);
+  
+  // Esconde o look atual
+  maisVendidos[maisVendidosAtual].classList.remove('ativo');
+  
+  // Calcula o novo índice
+  maisVendidosAtual += direcao;
+  if (maisVendidosAtual >= maisVendidos.length) maisVendidosAtual = 0;
+  if (maisVendidosAtual < 0) maisVendidosAtual = maisVendidos.length - 1;
+  
+  // Mostra o novo look
+  maisVendidos[maisVendidosAtual].classList.add('ativo');
+  
+  // Se tiver apenas uma imagem, não precisa de intervalo
+  let imagens = maisVendidos[maisVendidosAtual].querySelectorAll('.carrossel-imagens img');
+  if (imagens.length > 1) {
+    // Reinicia o carrossel do novo look
+    imagens.forEach((img, i) => {
+      img.classList.remove('ativo');
+      if (i === 0) img.classList.add('ativo');
+    });
+    
+    let imgAtual = 0;
+    intervalos[maisVendidosAtual + looks.length] = setInterval(() => {
+      imagens[imgAtual].classList.remove('ativo');
+      imgAtual = (imgAtual + 1) % imagens.length;
+      imagens[imgAtual].classList.add('ativo');
+    }, 5000);
+  }
+}
 
-  <section id="sobre-duda" class="sobre-duda">
-    <h2>Sobre a Duda</h2>
-    <img src="src/img/duda-foto.jpeg" alt="Duda Macedo" class="img-duda" />
-    <p>
-      Apaixonada pelo o que faço, comecei com a loja online e consegui expandir para o físico após 2 anos, com muito esforço e
+// FUNÇÕES PARA O CARROSSEL DE FEEDBACKS
+function initFeedbackCarousel() {
+  // Cria os dots de navegação
+  feedbackSlides.forEach((slide, index) => {
+    const dot = document.createElement('div');
+    dot.classList.add('feedback-dot');
+    if (index === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => {
+      goToFeedbackSlide(index);
+    });
+    feedbackDotsContainer.appendChild(dot);
+  });
+  
+  // Adiciona eventos aos botões de navegação
+  document.querySelector('.feedback-prev').addEventListener('click', () => {
+    prevFeedbackSlide();
+  });
+  
+  document.querySelector('.feedback-next').addEventListener('click', () => {
+    nextFeedbackSlide();
+  });
+  
+  // Inicia o carrossel automático
+  startFeedbackCarousel();
+  
+  // Pausa o carrossel quando o mouse está sobre ele
+  const carouselContainer = document.querySelector('.feedback-carousel-container');
+  carouselContainer.addEventListener('mouseenter', () => {
+    clearInterval(feedbackInterval);
+  });
+  
+  carouselContainer.addEventListener('mouseleave', () => {
+    startFeedbackCarousel();
+  });
+}
+
+function goToFeedbackSlide(index) {
+  currentFeedbackSlide = (index + feedbackSlideCount) % feedbackSlideCount;
+  const offset = -currentFeedbackSlide * 100;
+  feedbackCarousel.style.transform = `translateX(${offset}%)`;
+  
+  // Atualiza os dots ativos
+  document.querySelectorAll('.feedback-dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === currentFeedbackSlide);
+  });
+}
+
+function nextFeedbackSlide() {
+  goToFeedbackSlide(currentFeedbackSlide + 1);
+}
+
+function prevFeedbackSlide() {
+  goToFeedbackSlide(currentFeedbackSlide - 1);
+}
+
+function startFeedbackCarousel() {
+  clearInterval(feedbackInterval);
+  feedbackInterval = setInterval(() => {
+    nextFeedbackSlide();
+  }, 5000); // Muda a cada 5 segundos
+}
+
+// Inicializa quando a página carrega
+document.addEventListener('DOMContentLoaded', function() {
+  inicializarCarrosseis();
+  
+  // Mostra a primeira seção por padrão
+  document.querySelector('section').classList.add('ativo');
+});
