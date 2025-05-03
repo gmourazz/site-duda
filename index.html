@@ -4,7 +4,247 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Use Dude - Duda Macedo</title>
-  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    
+    body {
+      background-color: #f8f8f8;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    header {
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+    
+    .header-container {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 15px;
+      object-fit: cover;
+    }
+    
+    h1 {
+      font-size: 1.8rem;
+      color: #d3d3d3;
+    }
+    
+    .menu-categorias {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .btn-categoria {
+      background-color: #d3d3d3;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      transition: background-color 0.3s;
+      text-decoration: none;
+    }
+    
+    .btn-categoria:hover {
+      background-color: #b8b8b8;
+    }
+    
+    .btn-sobre-duda {
+      background-color: #d3d3d3;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    section {
+      padding: 30px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    h2 {
+      color: #d3d3d3;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .carrossel-principal {
+      position: relative;
+      max-width: 800px;
+      margin: 30px auto;
+    }
+    
+    .look-container {
+      display: none;
+      text-align: center;
+    }
+    
+    .look-container.ativo {
+      display: block;
+    }
+    
+    .carrossel-imagens {
+      position: relative;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    
+    .carrossel-imagens img {
+      max-width: 100%;
+      max-height: 70vh;
+      width: auto;
+      height: auto;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .carrossel-imagens img.ativo {
+      opacity: 1;
+    }
+    
+    .seta {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      color: white;
+      background-color: rgba(0,0,0,0.5);
+      cursor: pointer;
+      padding: 10px;
+      z-index: 10;
+      border-radius: 50%;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+    
+    .seta:hover {
+      background-color: rgba(0,0,0,0.7);
+    }
+    
+    .seta.esquerda {
+      left: 10px;
+    }
+    
+    .seta.direita {
+      right: 10px;
+    }
+    
+    .seta-principal {
+      font-size: 2.5rem;
+      background-color: rgba(0,0,0,0.7);
+      padding: 15px;
+    }
+    
+    .nome-look {
+      font-size: 1.5rem;
+      margin: 15px 0;
+      font-weight: bold;
+      color: #d3d3d3;
+    }
+    
+    .sobre-duda {
+      background-color: #fff;
+      padding: 30px;
+      margin-top: 30px;
+      text-align: center;
+      display: none;
+    }
+    
+    .img-duda {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 20px auto;
+      display: block;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: white;
+      margin-top: 30px;
+    }
+    
+    .btn-whatsapp {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #25D366;
+      color: white;
+      padding: 15px;
+      border-radius: 50px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 100;
+    }
+    
+    .btn-whatsapp img {
+      margin-right: 10px;
+    }
+    
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
+      
+      .header-container {
+        margin-bottom: 15px;
+        justify-content: center;
+      }
+      
+      .menu-categorias {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        justify-content: flex-start;
+      }
+      
+      .carrossel-imagens img {
+        max-height: 50vh;
+      }
+      
+      .seta-principal {
+        font-size: 2rem;
+        padding: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -12,30 +252,129 @@
       <img src="src/img/logo.jpeg" alt="Logo Use Dude" class="logo" />
       <div>
         <h1>Use Dude</h1>
-        <p>Moda com atitude por Duda Macedo</p>
+        <p>- By Duda Macedo</p>
       </div>
     </div>
+    
+    <div class="menu-categorias">
+      <a href="produtos.html" class="btn-categoria">Produtos Disponíveis</a>
+      <a href="mais-vendidos.html" class="btn-categoria">Mais vendidos</a>
+      <a href="quem-somos.html" class="btn-categoria">Quem somos</a>
+      <a href="redes-sociais.html" class="btn-categoria">Redes Sociais</a>
+      <a href="feedbacks.html" class="btn-categoria">Feedbacks</a>
+      <a href="pagamentos.html" class="btn-categoria">Formas de Pagamento</a>
+      <a href="entregas.html" class="btn-categoria">Entregas</a>
+      <a href="loja-fisica.html" class="btn-categoria">Loja Física</a>
+    </div>
+    
+    <button class="btn-sobre-duda" onclick="toggleSobreDuda()">Quem somos</button>
   </header>
 
   <section>
     <h2>Sobre a Loja</h2>
     <p>A Use Dude é uma loja de moda independente que valoriza estilo, conforto e autenticidade. Todas as peças são escolhidas com carinho por Duda Macedo para refletir a personalidade única de cada cliente.</p>
 
-    <h2>Produtos em Destaque</h2>
-    <div class="produtos-destaque">
-      <div class="produto">
-        <img src="https://via.placeholder.com/300x400.png?text=Cropped+Bege" alt="Cropped Bege" />
-        <p>Cropped Bege – peça confortável e estilosa, perfeita para o dia a dia.</p>
+    <h2>Produtos Disponíveis</h2>
+    
+    <div class="carrossel-principal">
+      <!-- Setas de navegação entre looks -->
+      <div class="seta seta-principal esquerda" onclick="mudarLook(-1)">&#10094;</div>
+      <div class="seta seta-principal direita" onclick="mudarLook(1)">&#10095;</div>
+      
+      <!-- Bata Ketylle -->
+      <div class="look-container ativo" data-look="Bata Ketylle">
+        <div class="carrossel-imagens">
+          <img src="src/img/bata-ketylle-1.jpeg" alt="Bata Ketylle 1" class="ativo">
+          <img src="src/img/bata-ketylle-2.jpeg" alt="Bata Ketylle 2">
+          <img src="src/img/bata-ketylle-3.jpeg" alt="Bata Ketylle 3">
+        </div>
+        <div class="nome-look">Bata Ketylle</div>
       </div>
-
-      <div class="produto">
-        <img src="https://via.placeholder.com/300x400.png?text=Calça+Wide+Leg" alt="Calça Wide Leg" />
-        <p>Calça Jeans Wide Leg – jeans de alta qualidade com modelagem moderna.</p>
+      
+      <!-- Vestido Lolla -->
+      <div class="look-container" data-look="Vestido Lolla">
+        <div class="carrossel-imagens">
+          <img src="src/img/vestido-lolla.jpeg" alt="Vestido Lolla 1" class="ativo">
+          <img src="src/img/vestido-lolla-2.jpeg" alt="Vestido Lolla 2">
+        </div>
+        <div class="nome-look">Vestido Lolla</div>
+      </div>
+      
+      <!-- Conjunto Talita -->
+      <div class="look-container" data-look="Conjunto Talita">
+        <div class="carrossel-imagens">
+          <img src="src/img/conjunto-talita.jpeg" alt="Conjunto Talita 1" class="ativo">
+          <img src="src/img/conjunto-talita-2.jpeg" alt="Conjunto Talita 2">
+          <img src="src/img/conjunto-talita-3.jpeg" alt="Conjunto Talita 3">
+        </div>
+        <div class="nome-look">Conjunto Talita</div>
+      </div>
+      
+      <!-- Vestido Ágatha -->
+      <div class="look-container" data-look="Vestido Ágatha">
+        <div class="carrossel-imagens">
+          <img src="src/img/vestido-ágatha.jpeg" alt="Vestido Ágatha 1" class="ativo">
+          <img src="src/img/vestido-ágatha-2.jpeg" alt="Vestido Ágatha 2">
+          <img src="src/img/vestido-ágatha-3.jpeg" alt="Vestido Ágatha 3">
+        </div>
+        <div class="nome-look">Vestido Ágatha</div>
+      </div>
+      
+      <!-- Calça Isabela -->
+      <div class="look-container" data-look="Calça Isabela">
+        <div class="carrossel-imagens">
+          <img src="src/img/calça-isabela.jpeg" alt="Calça Isabela" class="ativo">
+        </div>
+        <div class="nome-look">Calça Isabela</div>
+      </div>
+      
+      <!-- Calça Anny -->
+      <div class="look-container" data-look="Calça Anny">
+        <div class="carrossel-imagens">
+          <img src="src/img/calça-anny.jpeg" alt="Calça Anny 1" class="ativo">
+          <img src="src/img/calça-anny-2.jpeg" alt="Calça Anny 2">
+          <img src="src/img/calça-anny-3.jpeg" alt="Calça Anny 3">
+        </div>
+        <div class="nome-look">Calça Anny</div>
+      </div>
+      
+      <!-- Vestido Nicolly -->
+      <div class="look-container" data-look="Vestido Nicolly">
+        <div class="carrossel-imagens">
+          <img src="src/img/vestido-nicolly.jpeg" alt="Vestido Nicolly" class="ativo">
+        </div>
+        <div class="nome-look">Vestido Nicolly</div>
+      </div>
+      
+      <!-- Blusa Lara -->
+      <div class="look-container" data-look="Blusa Lara">
+        <div class="carrossel-imagens">
+          <img src="src/img/blusa-lara.jpeg" alt="Blusa Lara" class="ativo">
+        </div>
+        <div class="nome-look">Blusa Lara</div>
+      </div>
+      
+      <!-- Macacão Agnes -->
+      <div class="look-container" data-look="Macacão Agnes">
+        <div class="carrossel-imagens">
+          <img src="src/img/macacão-agnes.jpeg" alt="Macacão Agnes 1" class="ativo">
+          <img src="src/img/macacão-agnes-1.jpeg" alt="Macacão Agnes 2">
+          <img src="src/img/macacão-agnes-2.jpeg" alt="Macacão Agnes 3">
+          <img src="src/img/macacão-agnes-3.jpeg" alt="Macacão Agnes 4">
+        </div>
+        <div class="nome-look">Macacão Agnes</div>
+      </div>
+      
+      <!-- Vestido Flora -->
+      <div class="look-container" data-look="Vestido Flora">
+        <div class="carrossel-imagens">
+          <img src="src/img/vestido-flora.jpeg" alt="Vestido Flora" class="ativo">
+        </div>
+        <div class="nome-look">Vestido Flora</div>
       </div>
     </div>
 
-    <h2>Contato</h2>
-    <p>Quer ver mais peças ou fazer um pedido? Fale diretamente com a Duda:</p>
+    <p style="text-align: center; margin-top: 30px;">Quer ver mais peças ou fazer um pedido? Fale diretamente com a Duda no Whatsapp ou no Instagram da Loja!!</p>
   </section>
 
   <section id="sobre-duda" class="sobre-duda">
@@ -43,7 +382,7 @@
     <img src="src/img/duda-foto.jpeg" alt="Duda Macedo" class="img-duda" />
     <p>
       Apaixonada pelo o que faço, comecei com a loja online e consegui expandir para o físico após 2 anos, com muito esforço e dedicação!!<br />
-      Jovem de apenas 23 anos mas apaixonada pelas minhas clientes vestindo Use Dude, venha fazer parte do nosso grupinho!!
+      Jovem de apenas 23 anos apaixonada pelas minhas clientes vestindo Use Dude, venha fazer parte do nosso grupinho!!
     </p>
   </section>
 
@@ -56,6 +395,79 @@
     Chamar no WhatsApp
   </a>
 
-  <script src="js/script.js"></script>
+  <script>
+    // Variáveis globais
+    let lookAtual = 0;
+    let looks = document.querySelectorAll('.look-container');
+    let intervalos = [];
+    
+    // Inicializa os carrosséis
+    function inicializarCarrosseis() {
+      looks.forEach((look, index) => {
+        let imagens = look.querySelectorAll('.carrossel-imagens img');
+        if (imagens.length > 1) {
+          let imgAtual = 0;
+          intervalos[index] = setInterval(() => {
+            imagens[imgAtual].classList.remove('ativo');
+            imgAtual = (imgAtual + 1) % imagens.length;
+            imagens[imgAtual].classList.add('ativo');
+          }, 5000);
+        }
+      });
+    }
+    
+    // Muda o look principal
+    function mudarLook(direcao) {
+      // Para o intervalo do look atual
+      clearInterval(intervalos[lookAtual]);
+      
+      // Esconde o look atual
+      looks[lookAtual].classList.remove('ativo');
+      
+      // Calcula o novo índice
+      lookAtual += direcao;
+      if (lookAtual >= looks.length) lookAtual = 0;
+      if (lookAtual < 0) lookAtual = looks.length - 1;
+      
+      // Mostra o novo look
+      looks[lookAtual].classList.add('ativo');
+      
+      // Se tiver apenas uma imagem, não precisa de intervalo
+      let imagens = looks[lookAtual].querySelectorAll('.carrossel-imagens img');
+      if (imagens.length > 1) {
+        // Reinicia o carrossel do novo look
+        imagens.forEach((img, i) => {
+          img.classList.remove('ativo');
+          if (i === 0) img.classList.add('ativo');
+        });
+        
+        let imgAtual = 0;
+        intervalos[lookAtual] = setInterval(() => {
+          imagens[imgAtual].classList.remove('ativo');
+          imgAtual = (imgAtual + 1) % imagens.length;
+          imagens[imgAtual].classList.add('ativo');
+        }, 5000);
+      }
+    }
+    
+    // Inicializa quando a página carrega
+    window.onload = function() {
+      inicializarCarrosseis();
+    };
+    
+    // Função para mostrar/ocultar a seção "Sobre a Duda" com scroll suave
+    function toggleSobreDuda() {
+      const sobreDuda = document.getElementById('sobre-duda');
+      const isHidden = sobreDuda.style.display === 'none' || sobreDuda.style.display === '';
+      
+      // Alterna a exibição
+      sobreDuda.style.display = isHidden ? 'block' : 'none';
+      
+      // Se estiver mostrando, faz o scroll suave
+      if (isHidden) {
+        sobreDuda.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  </script>
 </body>
 </html>

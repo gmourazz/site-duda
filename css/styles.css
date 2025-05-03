@@ -1,4 +1,3 @@
-/* Importando as fontes do Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@300;500;700&display=swap');
 
 * {
@@ -8,11 +7,9 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif; /* Usando Roboto para o corpo do site */
+  font-family: 'Roboto', sans-serif;
   background-color: #F8F8F8;
   color: #333;
-  margin: 0;
-  padding: 0;
   scroll-behavior: smooth;
 }
 
@@ -34,13 +31,12 @@ header {
   height: 120px;
   border-radius: 50%;
   border: 5px solid #fff;
-  display: block;
-  margin-right: 20px; /* Espaçamento entre logo e texto */
+  margin-right: 20px;
   object-fit: cover;
 }
 
 h1 {
-  font-family: 'Montserrat', sans-serif; /* Usando Montserrat para o título */
+  font-family: 'Montserrat', sans-serif;
   font-size: 2.5rem;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -59,7 +55,7 @@ section {
 }
 
 h2 {
-  font-family: 'Montserrat', sans-serif; /* Usando Montserrat para os subtítulos */
+  font-family: 'Montserrat', sans-serif;
   font-size: 2rem;
   margin-bottom: 20px;
 }
@@ -78,32 +74,83 @@ h2 {
 }
 
 .produto p {
-  font-family: 'Roboto', sans-serif;
   font-size: 1.1rem;
   color: #555;
 }
 
 .produtos-destaque {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.carrossel {
+  position: relative;
+  width: 80%;
+  max-width: 600px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.carrossel-imagem {
+  width: 100%;
+  height: auto;
+  display: none;
+  object-fit: cover;
+}
+
+.carrossel-imagem.ativo {
+  display: block;
+}
+
+.seta {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  cursor: pointer;
+}
+
+.seta.direita {
+  right: 10px;
+}
+
+.seta.esquerda {
+  left: 10px;
+}
+
+h3 {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
 }
 
 .sobre-duda {
+  display: none;
   padding: 40px 30px;
   background-color: #000;
   color: #fff;
   text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.sobre-duda.mostrar {
+  display: block;
 }
 
 .sobre-duda h2 {
-  font-family: 'Montserrat', sans-serif;
   font-size: 2rem;
   margin-bottom: 20px;
 }
 
 .sobre-duda p {
-  font-family: 'Roboto', sans-serif;
   font-size: 1.1rem;
   color: #ccc;
   margin-bottom: 20px;
@@ -116,6 +163,29 @@ h2 {
   border: 5px solid #fff;
   margin-bottom: 20px;
   object-fit: cover;
+}
+
+.btn-sobre-duda {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  background-color: #94613c;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.btn-sobre-duda:hover {
+  background-color: #7a4f30;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 footer {
@@ -132,7 +202,6 @@ footer p {
   color: #ccc;
 }
 
-/* Posicionar o botão do WhatsApp no canto inferior direito */
 .btn-whatsapp {
   position: fixed;
   bottom: 20px;
