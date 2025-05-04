@@ -12,15 +12,39 @@
       font-family: 'Roboto', sans-serif;
     }
     
+    /* Aplica a cor de fundo para toda a página */
+    body,
+    .conteudo-principal,
+    section,
+    .carrossel-principal,
+    .carrossel-feedbacks,
+    .look-container,
+    .carrossel-imagens,
+    .sobre-duda,
+    .carrossel-feedback-imagens,
+    .feedback-slide,
+    .lista-pagamentos li,
+    .texto-destaque,
+    footer {
+      background-color: #A09D9E;
+      color: #777475; /* Nova cor do texto para fundo #A09D9E */
+    }
+    
+    /* Mantém as cores originais para os elementos que não devem mudar */
+    .btn-whatsapp,
+    .btn-instagram,
+    .btn-categoria,
+    header {
+      background-color: initial;
+    }
+
     body {
-      background-color: #e0e0e0;
-      color: #333;
       line-height: 1.6;
     }
     
     header {
       background-color: #424242;
-      padding: 20px;
+      padding: 15px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.2);
       display: flex;
       justify-content: space-between;
@@ -37,16 +61,16 @@
     }
     
     .logo {
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      margin-right: 15px;
+      margin-right: 10px;
       object-fit: cover;
       border: 2px solid #bdbdbd;
     }
     
     h1 {
-      font-size: 1.8rem;
+      font-size: 1.4rem;
       color: #e0e0e0;
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
@@ -54,30 +78,34 @@
     
     .header-container p {
       color: #bdbdbd;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
     
     .menu-categorias {
       display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-      justify-content: center;
+      gap: 8px;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: auto;
+      padding: 10px 5px;
+      -webkit-overflow-scrolling: touch;
     }
     
     .btn-categoria {
       background-color: #616161;
       color: #f5f5f5;
       border: none;
-      padding: 10px 20px;
+      padding: 8px 15px;
       border-radius: 25px;
       cursor: pointer;
       font-weight: bold;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       white-space: nowrap;
       transition: all 0.3s ease;
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
       position: relative;
       overflow: hidden;
+      flex-shrink: 0;
     }
     
     .btn-categoria:hover {
@@ -116,16 +144,15 @@
     }
     
     .conteudo-principal {
-      margin-top: 120px;
-      padding: 20px;
+      margin-top: 140px;
+      padding: 15px;
     }
     
     section {
-      padding: 30px 0;
+      padding: 20px 0;
       max-width: 1200px;
-      margin: 20px auto;
+      margin: 15px auto;
       display: none;
-      background-color: transparent;
       position: relative;
       overflow: hidden;
     }
@@ -147,13 +174,14 @@
     }
     
     h2 {
-      color: #424242;
-      margin-bottom: 20px;
+      color: #424242; /* Mantém a cor original */
+      margin-bottom: 15px;
       text-align: center;
       position: relative;
       padding-bottom: 10px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
+      font-size: 1.5rem;
     }
 
     h2::after {
@@ -169,9 +197,8 @@
     
     .carrossel-principal, .carrossel-feedbacks {
       position: relative;
-      max-width: 800px;
-      margin: 30px auto;
-      background-color: transparent;
+      max-width: 100%;
+      margin: 20px auto;
       border-radius: 15px;
     }
     
@@ -186,24 +213,22 @@
     
     .carrossel-imagens {
       position: relative;
-      min-height: 300px;
+      min-height: 200px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 20px 0;
-      background-color: transparent;
+      margin: 15px 0;
     }
     
     .carrossel-feedback-imagens {
       position: relative;
       width: 100%;
       max-width: 500px;
-      height: 500px;
+      height: 300px;
       margin: 0 auto;
       overflow: hidden;
       border-radius: 15px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      background-color: #f8f8f8;
     }
     
     .feedback-slides-container {
@@ -218,7 +243,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #f8f8f8;
     }
     
     .feedback-slide img {
@@ -232,7 +256,7 @@
     
     .carrossel-imagens img {
       max-width: 100%;
-      max-height: 70vh;
+      max-height: 60vh;
       width: auto;
       height: auto;
       opacity: 0;
@@ -249,11 +273,11 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 2rem;
+      font-size: 1.5rem;
       color: white;
       background-color: rgba(66, 66, 66, 0.7);
       cursor: pointer;
-      padding: 10px;
+      padding: 8px;
       z-index: 10;
       border-radius: 50%;
       user-select: none;
@@ -266,42 +290,41 @@
     }
     
     .seta.esquerda {
-      left: 10px;
+      left: 5px;
     }
     
     .seta.direita {
-      right: 10px;
+      right: 5px;
     }
     
     .seta-principal {
-      font-size: 2.5rem;
+      font-size: 1.8rem;
       background-color: rgba(66, 66, 66, 0.7);
-      padding: 15px;
+      padding: 10px;
     }
     
     .nome-look {
-      font-size: 1.5rem;
-      margin: 15px 0;
+      font-size: 1.3rem;
+      margin: 10px 0;
       font-weight: bold;
-      color: #424242;
+      color: #424242; /* Mantém a cor original */
       font-family: 'Montserrat', sans-serif;
     }
     
     .sobre-duda {
-      background-color: #f0f0f0;
-      padding: 30px;
-      margin-top: 30px;
+      padding: 20px;
+      margin-top: 20px;
       text-align: center;
       border-radius: 15px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
     
     .img-duda {
-      width: 150px;
-      height: 150px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
       object-fit: cover;
-      margin: 20px auto;
+      margin: 15px auto;
       display: block;
       border: 3px solid #bdbdbd;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -309,10 +332,8 @@
     
     footer {
       text-align: center;
-      padding: 20px;
-      background-color: #424242;
-      color: #e0e0e0;
-      margin-top: 30px;
+      padding: 15px;
+      margin-top: 20px;
       position: relative;
       box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
     }
@@ -328,15 +349,14 @@
     }
     
     footer p {
-      color: #bdbdbd;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
     
     .btn-whatsapp, .btn-instagram {
       position: fixed;
-      right: 30px;
+      right: 15px;
       color: white;
-      padding: 15px;
+      padding: 10px 12px;
       border-radius: 50px;
       text-decoration: none;
       display: flex;
@@ -344,20 +364,23 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
       z-index: 100;
       transition: all 0.3s;
+      font-size: 0.8rem;
     }
     
     .btn-whatsapp {
       background-color: #616161;
-      bottom: 30px;
+      bottom: 20px;
     }
     
     .btn-instagram {
       background-color: #757575;
-      bottom: 90px;
+      bottom: 75px;
     }
     
     .btn-whatsapp img, .btn-instagram img {
-      margin-right: 10px;
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
       filter: brightness(0) invert(1);
     }
 
@@ -378,13 +401,14 @@
       list-style-type: none;
       max-width: 500px;
       margin: 0 auto;
+      padding: 0 20px;
     }
     
     .lista-pagamentos li {
       position: relative;
       padding-left: 25px;
-      margin-bottom: 10px;
-      color: #424242;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
     }
     
     .lista-pagamentos li:before {
@@ -396,10 +420,11 @@
     }
     
     .texto-destaque {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
+      font-size: 1rem;
+      margin-bottom: 10px;
       text-align: center;
-      color: #424242;
+      color: #424242; /* Mantém a cor original */
+      padding: 0 10px;
     }
     
     .texto-negrito {
@@ -409,15 +434,16 @@
     .feedback-dots {
       display: flex;
       justify-content: center;
-      margin-top: 15px;
+      margin-top: 10px;
+      flex-wrap: wrap;
     }
     
     .feedback-dot {
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background-color: #bdbdbd;
-      margin: 0 5px;
+      margin: 0 4px 5px;
       cursor: pointer;
       transition: all 0.3s;
     }
@@ -440,52 +466,134 @@
       animation: btnClickWave 0.4s ease-out;
     }
     
-    @media (max-width: 768px) {
+    @media (min-width: 768px) {
       header {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-        padding-bottom: 20px;
+        padding: 20px;
+        flex-direction: row;
       }
       
-      .header-container {
-        margin-bottom: 15px;
-        justify-content: center;
+      .logo {
+        width: 60px;
+        height: 60px;
+        margin-right: 15px;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .header-container p {
+        font-size: 0.9rem;
       }
       
       .menu-categorias {
-        width: 100%;
-        overflow-x: auto;
-        padding-bottom: 10px;
-        justify-content: flex-start;
-        gap: 8px;
+        gap: 15px;
+        padding-bottom: 0;
+        justify-content: center;
       }
-
+      
       .btn-categoria {
-        padding: 8px 15px;
-        font-size: 0.8rem;
+        padding: 10px 20px;
+        font-size: 0.9rem;
       }
       
       .conteudo-principal {
-        margin-top: 180px;
+        margin-top: 150px;
+        padding: 20px;
+      }
+      
+      section {
+        padding: 30px 0;
+        margin: 20px auto;
+      }
+      
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
       }
       
       .carrossel-imagens img {
-        max-height: 50vh;
+        max-height: 70vh;
       }
       
       .carrossel-feedback-imagens {
-        height: 350px;
+        height: 400px;
       }
       
-      .seta-principal {
+      .seta {
         font-size: 2rem;
         padding: 10px;
       }
       
-      .btn-instagram {
+      .seta-principal {
+        font-size: 2.5rem;
+        padding: 15px;
+      }
+      
+      .nome-look {
+        font-size: 1.5rem;
+        margin: 15px 0;
+      }
+      
+      .sobre-duda {
+        padding: 30px;
+        margin-top: 30px;
+      }
+      
+      .img-duda {
+        width: 150px;
+        height: 150px;
+        margin: 20px auto;
+      }
+      
+      footer {
+        padding: 20px;
+      }
+      
+      footer p {
+        font-size: 0.9rem;
+      }
+      
+      .btn-whatsapp, .btn-instagram {
         right: 30px;
+        padding: 12px 15px;
+        font-size: 0.9rem;
+      }
+      
+      .btn-whatsapp img, .btn-instagram img {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+      }
+      
+      .btn-instagram {
         bottom: 90px;
+      }
+      
+      .lista-pagamentos li {
+        font-size: 1rem;
+        margin-bottom: 10px;
+      }
+      
+      .texto-destaque {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+      }
+      
+      .feedback-dot {
+        width: 12px;
+        height: 12px;
+        margin: 0 5px;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .conteudo-principal {
+        margin-top: 120px;
+      }
+      
+      .carrossel-feedback-imagens {
+        height: 500px;
       }
     }
   </style>
@@ -502,12 +610,12 @@
     </div>
     
     <div class="menu-categorias">
-      <button class="btn-categoria" onclick="mostrarSecao('produtos-disponiveis')">Produtos Disponíveis</button>
+      <button class="btn-categoria" onclick="mostrarSecao('produtos-disponiveis')">Produtos</button>
       <button class="btn-categoria" onclick="mostrarSecao('mais-vendidos')">Mais vendidos</button>
       <button class="btn-categoria" onclick="mostrarSecao('quem-somos')">Quem somos</button>
       <button class="btn-categoria" onclick="mostrarSecao('redes-sociais')">Redes Sociais</button>
       <button class="btn-categoria" onclick="mostrarSecao('feedbacks')">Feedbacks</button>
-      <button class="btn-categoria" onclick="mostrarSecao('pagamentos')">Formas de Pagamento</button>
+      <button class="btn-categoria" onclick="mostrarSecao('pagamentos')">Pagamentos</button>
       <button class="btn-categoria" onclick="mostrarSecao('entregas')">Entregas</button>
     </div>
   </header>
@@ -662,17 +770,17 @@
     <!-- Redes Sociais -->
     <section id="redes-sociais">
       <h2>Redes Sociais</h2>
-      <p>Siga-nos nas redes sociais para ficar por dentro das novidades!</p>
+      <p class="texto-destaque">Siga-nos nas redes sociais para ficar por dentro das novidades!</p>
       <div style="text-align: center; margin-top: 20px;">
-        <a href="https://www.instagram.com/usedude_/" class="btn-categoria" target="_blank" style="display: inline-block; margin: 10px;">Instagram da Loja</a>
-        <a href="https://wa.me/5534996827550?text=Oii%20Duda,%20vim%20do%20site%20Use%20Dude%20e%20gostaria%20de%20fazer%20um%20pedido!!%20" class="btn-categoria" target="_blank" style="display: inline-block; margin: 10px;">Nosso WhatsApp</a>
+        <a href="https://www.instagram.com/usedude_/" class="btn-categoria" target="_blank" style="display: inline-block; margin: 8px;">Instagram da Loja</a>
+        <a href="https://wa.me/5534996827550?text=Oii%20Duda,%20vim%20do%20site%20Use%20Dude%20e%20gostaria%20de%20fazer%20um%20pedido!!%20" class="btn-categoria" target="_blank" style="display: inline-block; margin: 8px;">Nosso WhatsApp</a>
       </div>
     </section>
 
     <!-- Feedbacks -->
     <section id="feedbacks">
       <h2>Feedbacks</h2>
-      <p style="font-size: 1.5rem; text-align: center; margin-bottom: 30px;">Alguns feedbacks das nossas clientes!</p>
+      <p class="texto-destaque">Alguns feedbacks das nossas clientes!</p>
       
       <div class="carrossel-feedbacks">
         <div class="feedback-container ativo">
@@ -720,7 +828,7 @@
     <!-- Formas de Pagamento -->
     <section id="pagamentos">
       <h2>Formas de Pagamento</h2>
-      <p>Nossas formas de PAGAMENTO:</p>
+      <p class="texto-destaque">Nossas formas de PAGAMENTO:</p>
       <ul class="lista-pagamentos">
         <li>Dinheiro</li>
         <li>Pix</li>
@@ -731,15 +839,14 @@
     </section>
 
     <!-- Entregas -->
-    <section id="entregas" style="text-align: center;">
+    <section id="entregas">
       <h2>Entregas 🚚</h2>
       <p class="texto-destaque">Loja Fisica - Uberlândia, MG</p>
       <p class="texto-destaque">Nossa localização: Av. José Abdulmassih, 681 - Shoppink Park</p>
       
-      <p class="texto-negrito">Como são realizadas as entregas:</p>
-      <ul class="lista-pagamentos" style="display: inline-block; text-align: left; margin: 0 auto; padding-left: 20px;">
-        <li>Envio para todo Brasil via Correios - envie seu CEP pelo WhatsApp para calcular frete 
-        </li>
+      <p class="texto-negrito" style="text-align: center; margin: 15px 0 10px;">Como são realizadas as entregas:</p>
+      <ul class="lista-pagamentos">
+        <li>Envio para todo Brasil via Correios - envie seu CEP pelo WhatsApp para calcular frete</li>
         <li>Envio para Ituiutaba semanalmente - verificar próximo dia de envio pelo WhatsApp</li>
       </ul>
     </section>
@@ -751,7 +858,7 @@
 
   <a href="https://wa.me/5534996827550?text=Oii%20Duda,%20vim%20do%20site%20Use%20Dude%20e%20gostaria%20de%20fazer%20um%20pedido!!%20" class="btn-whatsapp" target="_blank">
     <img src="https://img.icons8.com/ios-filled/24/ffffff/whatsapp.png" alt="WhatsApp" />
-    Chamar no WhatsApp
+    WhatsApp
   </a>
 
   <a href="https://www.instagram.com/usedude_/" class="btn-instagram" target="_blank">

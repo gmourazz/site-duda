@@ -1,226 +1,310 @@
-JS: @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@300;500;700&display=swap');
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-body {
   font-family: 'Roboto', sans-serif;
-  background-color: #F8F8F8;
-  color: #333;
-  scroll-behavior: smooth;
 }
 
+/* Cor de texto padrão para todo o site */
+body {
+  color: #777475;
+  line-height: 1.6;
+  background-color: #A09D9E;
+}
+
+/* Header - mantendo cores originais */
 header {
-  background-color: #000;
-  color: #fff;
-  padding: 20px 30px;
-  position: relative;
+  background-color: #616161;
+  padding: 15px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
 }
 
 .header-container {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
 }
 
 .logo {
-  width: 120px;
-  height: 120px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  border: 5px solid #fff;
-  margin-right: 20px;
+  margin-right: 10px;
   object-fit: cover;
+  border: 2px solid #bdbdbd;
 }
 
 h1 {
+  font-size: 1.4rem;
+  color: #e0e0e0;
   font-family: 'Montserrat', sans-serif;
-  font-size: 2.5rem;
-  margin-top: 20px;
-  margin-bottom: 10px;
   font-weight: 500;
 }
 
-p {
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.2rem;
-  color: #777;
+.header-container p {
+  color: #bdbdbd;
+  font-size: 0.8rem;
+}
+
+/* Conteúdo principal */
+.conteudo-principal {
+  margin-top: 140px;
+  padding: 15px;
 }
 
 section {
-  padding: 40px 30px;
-  margin: 20px 0;
-}
-
-h2 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
-.produto {
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-.produto img {
-  width: 100%;
-  height: auto;
-  max-width: 300px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-}
-
-.produto p {
-  font-size: 1.1rem;
-  color: #555;
-}
-
-.produtos-destaque {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.carrossel {
+  padding: 20px 0;
+  max-width: 1200px;
+  margin: 15px auto;
+  display: none;
   position: relative;
-  width: 80%;
-  max-width: 600px;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
+  background-color: #A09D9E;
 }
 
-.carrossel-imagem {
-  width: 100%;
-  height: auto;
-  display: none;
-  object-fit: cover;
-}
-
-.carrossel-imagem.ativo {
+section.ativo {
   display: block;
+  animation: fadeIn 0.5s ease-out;
 }
 
-.seta {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  cursor: pointer;
-}
-
-.seta.direita {
-  right: 10px;
-}
-
-.seta.esquerda {
-  left: 10px;
-}
-
-h3 {
+/* Títulos */
+h2 {
+  color: #777475;
+  margin-bottom: 15px;
   text-align: center;
+  position: relative;
+  padding-bottom: 10px;
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.8rem;
-  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 1.5rem;
 }
 
-.sobre-duda {
+h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 2px;
+  background-color: #bdbdbd;
+}
+
+/* Carrosséis */
+.carrossel-principal, 
+.carrossel-feedbacks {
+  position: relative;
+  max-width: 100%;
+  margin: 20px auto;
+  border-radius: 15px;
+  background-color: #A09D9E;
+}
+
+.look-container, 
+.feedback-container {
   display: none;
-  padding: 40px 30px;
-  background-color: #000;
-  color: #fff;
   text-align: center;
-  animation: fadeIn 0.6s ease-in-out;
 }
 
-.sobre-duda.mostrar {
+.look-container.ativo, 
+.feedback-container.ativo {
   display: block;
 }
 
-.sobre-duda h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
+.carrossel-imagens {
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0;
+  background-color: #A09D9E;
 }
 
-.sobre-duda p {
-  font-size: 1.1rem;
-  color: #ccc;
-  margin-bottom: 20px;
+.carrossel-feedback-imagens {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: 300px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  background-color: #A09D9E;
 }
 
-.img-duda {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 5px solid #fff;
-  margin-bottom: 20px;
-  object-fit: cover;
+/* Elementos de texto */
+.nome-look {
+  font-size: 1.3rem;
+  margin: 10px 0;
+  font-weight: bold;
+  color: #777475;
+  font-family: 'Montserrat', sans-serif;
 }
 
-.btn-sobre-duda {
-  position: absolute;
-  right: 30px;
-  top: 30px;
-  background-color: #94613c;
-  color: #fff;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  cursor: pointer;
+.texto-destaque {
   font-size: 1rem;
-  transition: background-color 0.3s;
-}
-
-.btn-sobre-duda:hover {
-  background-color: #7a4f30;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-footer {
-  background-color: #333;
-  color: #fff;
+  margin-bottom: 10px;
   text-align: center;
-  padding: 10px;
-  font-size: 1rem;
+  color: #777475;
+  padding: 0 10px;
+}
+
+.texto-negrito {
+  font-weight: bold;
+}
+
+/* Botões */
+.btn-categoria {
+  background-color: #616161;
+  color: #616161;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.btn-categoria:hover {
+  background-color: #757575;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* Rodapé */
+footer {
+  text-align: center;
+  padding: 15px;
+  margin-top: 20px;
+  position: relative;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+  background-color: #616161;
 }
 
 footer p {
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: #ccc;
+  color: #616161;
+}
+
+/* Botões flutuantes */
+.btn-whatsapp, 
+.btn-instagram {
+  position: fixed;
+  right: 15px;
+  color: white;
+  padding: 10px 12px;
+  border-radius: 50px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  z-index: 100;
+  transition: all 0.3s;
+  font-size: 0.8rem;
 }
 
 .btn-whatsapp {
-  position: fixed;
+  background-color: #616161;
   bottom: 20px;
-  right: 20px;
-  display: inline-flex;
-  align-items: center;
-  background-color: #25D366;
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
 }
 
-.btn-whatsapp img {
-  margin-right: 8px;
+.btn-instagram {
+  background-color: #757575;
+  bottom: 75px;
 }
 
-.btn-whatsapp:hover {
-  background-color: #128C7E;
+/* Listas */
+.lista-pagamentos {
+  list-style-type: none;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.lista-pagamentos li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: #616161;
+}
+
+.lista-pagamentos li:before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: #616161;
+  font-weight: bold;
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes btnClickWave {
+  0% {
+    box-shadow: 0 0 0 0 rgba(97, 97, 97, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(97, 97, 97, 0);
+  }
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+  header {
+    padding: 20px;
+  }
+  
+  .logo {
+    width: 60px;
+    height: 60px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  .conteudo-principal {
+    margin-top: 150px;
+    padding: 20px;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  .nome-look {
+    font-size: 1.5rem;
+  }
+  
+  .texto-destaque {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .conteudo-principal {
+    margin-top: 120px;
+  }
 }
